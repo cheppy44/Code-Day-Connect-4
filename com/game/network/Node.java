@@ -1,17 +1,22 @@
 package com.game.network;
 
-public class Node extends NetworkObject {
+import java.util.List;
 
-	@Override
-	boolean isAvailable() {
-		// TODO Auto-generated method stub
-		return false;
+import com.game.connect4.State;
+
+public class Node { //Once a node exists. If it doens't have two inputs, find some using randomness.
+
+	private List<Synapse> inputs; //Must not be greater than 2
+	private List<Synapse> outputs;
+
+	private State state;
+
+	public Node(int nodeIndex) {
+
 	}
 
-	@Override
-	int propagateSignal() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setState(State input) {
+		this.state = input;
 	}
 
 }

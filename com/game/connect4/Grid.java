@@ -51,10 +51,6 @@ public class Grid {
 		return grid;
 	}
 
-	public int getArea() {
-		return area;
-	}
-
 	public void setArea(int area) {
 		this.area = area;
 	}
@@ -73,6 +69,10 @@ public class Grid {
 
 	public int getyHeight() {
 		return yHeight;
+	}
+
+	public int getArea() {
+		return area;
 	}
 
 }
