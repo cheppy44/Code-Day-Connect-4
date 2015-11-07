@@ -5,4 +5,4 @@
  * @author Nathan
  *
  */
-package com.game.gameNetwork;
+package com.game.network;
