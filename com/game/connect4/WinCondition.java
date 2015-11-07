@@ -32,10 +32,10 @@ public class WinCondition {
 		
 	}
 	
-	public WinCondition() {
-		Coordinates coordinates[grid.area()];
-		coordinates[0].getX(1);
-		coordinates[0].getY(1);
+	Grid grid;
+	
+	public WinCondition(Grid grid) {
+		this.grid = grid;
 	}
 
 }

@@ -13,6 +13,8 @@ public class Grid {
 		this.yHeight = yHeight;
 		this.area = xWidth * yHeight;
 		this.grid = new State[xWidth][yHeight];
+		WinCondition winCondition = new WinCondition(this);
+		WinDetection winDetector = new WinDetection(winCondition);
 	}
 
 	//Sets full grid to empty
