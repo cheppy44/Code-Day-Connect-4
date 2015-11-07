@@ -9,7 +9,8 @@ public class Grid {
 	int yHeight;
 	int area;
 	
-	private enum State{empty,red,yellow}
+	public static enum State{empty,red,yellow}
+	public static State state;
 	
 	private State[][] grid;
 	
@@ -38,13 +39,14 @@ public class Grid {
 	//Decides where to place a game piece based on a slot on the X plane and returns yCoordinate
 	public int dropGamePiece(int x, State state) {
 		boolean isEmpty = false;
-		int yCoordinate = (Integer) null;
-		for (int i = 0;isEmpty;i++) {
-			if (grid[x - 1][i] != State.empty) {
-				grid[x-1][i] = state;
+		int yCoordinate = 0;
+		for (int i = 0;!isEmpty;i++) {
+			if (grid[x - 1][i] == State.empty) {
+				grid[x - 1][i] = state;
 				
 				yCoordinate = i + 1;
 				isEmpty = true;
+				
 			}
 		}
 		
