@@ -20,6 +20,8 @@ public class Grid {
 		this.grid = new State[xWidth][yHeight];
 	}
 	
+	
+	//Sets full grid to empty
 	public void newGame() {
 		for (int x = 1;x <= xWidth;x++) {
 			for (int y = 1;y <= yHeight;y++) {
@@ -28,8 +30,27 @@ public class Grid {
 		}
 	}
 	
+	//Returns state of slot on the coordinate grid
 	public State getSlot(int x,int y) {
 		return grid[x - 1][y - 1];
 	}
+	
+	//Decides where to place a game piece based on a slot on the X plane and returns yCoordinate
+	public int dropGamePiece(int x, State state) {
+		boolean isEmpty = false;
+		int yCoordinate = (Integer) null;
+		for (int i = 0;isEmpty;i++) {
+			if (grid[x - 1][i] != State.empty) {
+				grid[x-1][i] = state;
+				
+				yCoordinate = i + 1;
+				isEmpty = true;
+			}
+		}
+		
+		return yCoordinate;
+	}
+	
+	
 
 }
