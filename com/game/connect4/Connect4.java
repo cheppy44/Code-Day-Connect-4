@@ -1,13 +1,13 @@
 package com.game.connect4;
 
+import com.game.network.Network;
+
 public class Connect4 {
-	
-	Grid gameGrid;
+	public Grid gameGrid;
+	public Network network;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-
+	public Connect4() {
+		gameGrid = new Grid(7, 6);
+		network = new Network(gameGrid);
 	}
-	
 }

@@ -3,10 +3,16 @@ package com.game.network;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Network {
-	private List<NetworkObject> networkObjects;
+import com.game.connect4.Grid;
 
-	public Network() {
-		this.networkObjects = new ArrayList<NetworkObject>();
+public class Network {
+	private Grid grid;
+	private List<NetworkObject> networkObjects; //Network objects themselves
+	private NetworkObject[][] networkInput; //Input from the grid
+
+	public Network(Grid grid) {
+		this.grid = grid;
+		networkObjects = new ArrayList<NetworkObject>();
+		networkInput = new Synapse[grid.getxWidth()][grid.getyHeight()];
 	}
 }

@@ -1,6 +1,8 @@
-package com.game.graphics;
+package com.game.unitTests;
 
 import org.junit.Test;
+
+import com.game.graphics.GUI;
 
 public class GUITest {
 

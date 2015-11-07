@@ -2,9 +2,9 @@ package com.game.connect4;
 
 public class Grid {
 
-	int xWidth;
-	int yHeight;
-	int area;
+	private int xWidth;
+	private int yHeight;
+	private int area;
 
 	private State[][] grid;
 
@@ -44,6 +44,18 @@ public class Grid {
 		}
 
 		return yCoordinate;
+	}
+
+	public State[][] getState() {
+		return grid;
+	}
+
+	public int getxWidth() {
+		return xWidth;
+	}
+
+	public int getyHeight() {
+		return yHeight;
 	}
 
 }
