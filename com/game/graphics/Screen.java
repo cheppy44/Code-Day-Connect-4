@@ -12,7 +12,7 @@ public class Screen {
 
 	public void update() { //Update screen. Drawing happens in this method.
 		Graphics g = image.getGraphics();
-		
+
 		//Image drawing commands here. Use g to draw onto the image.
 		g.drawRect(10, 10, 10, 10);
 		g.drawImage(image, 0, 0, null);
