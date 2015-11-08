@@ -16,6 +16,14 @@ public class Connection {
 		return startIndex;
 	}
 
+	public double getUsageWeight() {
+		return usageWeight;
+	}
+
+	public void setUsageWeight(double usageWeight) {
+		this.usageWeight = usageWeight;
+	}
+
 	public void setStartIndex(int startIndex) {
 		this.startIndex = startIndex;
 	}

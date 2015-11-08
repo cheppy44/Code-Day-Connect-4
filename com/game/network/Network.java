@@ -9,9 +9,8 @@ import com.game.exceptions.NetworkStructureException;
 
 public class Network {
 
-	private static final int numLayers = 100; // TODO Play with these values in
-												// the evolution stage
-	private static final int nodesPerLayer = 100;
+	private static final int numLayers = 4; // TODO Play with these values in the evolution stage
+	private static final int nodesPerLayer = 4;
 	private static final int DEFAULT_USAGE_WEIGHT = 1;
 
 	private Grid grid;
@@ -24,7 +23,7 @@ public class Network {
 	public Network(Grid grid) {
 		this.grid = grid; // FIXME testing this
 		numInputs = grid.getArea() * 2;
-		numOutputs = grid.getxWidth();
+		numOutputs = 3;
 		layerCounts = new int[numLayers];
 
 		nodes = new ArrayList<Node>();
@@ -41,7 +40,7 @@ public class Network {
 			layerCounts[numLayers - 1]++;
 		}
 
-		for (int i = 0; i < numLayers; i++) { // Sets up the hidden layers
+		for (int i = 1; i < numLayers - 1; i++) { //Sets up the hidden layers
 			for (int j = 0; j < nodesPerLayer; j++) {
 				nodes.add(new Node(i, j));
 				layerCounts[i]++;
@@ -58,14 +57,14 @@ public class Network {
 		for (int i = 0; i < grid.getxWidth(); i++) {
 			for (int j = 0; j < grid.getyHeight(); j++) {
 				switch (grid.getState()[i][j]) {
-				case empty:
-					break;
-				case red:
-					nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
-					break;
-				case yellow:
-					nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
-					break;
+					case empty:
+						break;
+					case red:
+						nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
+						break;
+					case yellow:
+						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
+						break;
 				}
 			}
 		}
@@ -95,10 +94,9 @@ public class Network {
 
 	// BEGIN UTILS FOR NETWORK SETUP HERE
 
-	public void connectNodes(int startLayerNum, int startLayerPos, int endLayerNum, int endLayerPos)
-			throws NetworkStructureException { // connects two nodes based on
-												// the coordinats of the nodes
-												// inputted
+	public void connectNodes(int startLayerNum, int startLayerPos, int endLayerNum, int endLayerPos) throws NetworkStructureException { // connects two nodes based on
+																																		// the coordinats of the nodes
+																																		// inputted
 		if (startLayerNum < 0 || startLayerNum > numLayers - 1) {
 			throw new NetworkStructureException("Invalid network structure");
 
@@ -141,18 +139,13 @@ public class Network {
 	public void connectAllAdjacentNodes() {
 		for (Node n : nodes) {
 			int nextConnectionLayer = n.getLayerNum() + 1;
-			if (nextConnectionLayer < numLayers) { // is this right or is it
-													// layercounts.length()?
-				while (layerCounts[nextConnectionLayer] == 0) {
-					nextConnectionLayer++;
-				}
-			}
-
-			for (int i = 0; i < layerCounts[nextConnectionLayer]; i++) {
-				try {
-					connectNodes(n.getLayerNum(), n.getLayerHeight(), nextConnectionLayer, i);
-				} catch (NetworkStructureException e) {
-					e.printStackTrace();
+			if (nextConnectionLayer < layerCounts.length) {
+				for (int i = 0; i < layerCounts[nextConnectionLayer]; i++) {
+					try {
+						connectNodes(n.getLayerNum(), n.getLayerHeight(), nextConnectionLayer, i);
+					} catch (NetworkStructureException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

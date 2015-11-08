@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
+	private static final int DEFAULT_THRESHOLD = 1;
 	private int layerNum;
 	private int layerHeight;
+	private int activationThreshold;
 
 	private List<Connection> outputConnections;
 	private List<Double> inputWeights;
@@ -15,6 +17,7 @@ public class Node {
 		outputConnections = new ArrayList<Connection>();
 		this.layerNum = layerNum;
 		this.layerHeight = layerHeight;
+		activationThreshold = DEFAULT_THRESHOLD;
 	}
 
 	public void addInputWeight(double input) {
@@ -35,7 +38,11 @@ public class Node {
 			weightSum += d;
 		}
 
-		return weightSum / inputWeights.size() >= 1;
+		return weightSum / inputWeights.size() >= activationThreshold;
+	}
+
+	public void setThreshold(int threshold) {
+		activationThreshold = threshold;
 	}
 
 	public int getLayerNum() {
