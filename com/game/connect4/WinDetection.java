@@ -76,13 +76,14 @@ public class WinDetection {
 			filledSlots++;
 		}
 		for (int i = x - 1; i >= 0 && i <= grid.getxWidth(); i--) {
-			if (dI >= 0 && dI <= grid.getyHeight()) {
+			if (dI <= 0 && dI >= grid.getyHeight()) {
 				break;
 			}
 			if (grid.getSlot(i, y - dI) != state) {
 				break;
 			}
 			filledSlots++;
+			dI++;
 		}
 		if (filledSlots == 4) {
 			return true;
@@ -95,7 +96,7 @@ public class WinDetection {
 		int filledSlots = 1;
 		int dI = 1;
 		for (int i = x + 1; i >= 0 && i <= grid.getxWidth(); i++) {
-			if (dI >= 0 && dI <= grid.getyHeight()) {
+			if (dI <= 0 && dI >= grid.getyHeight()) {
 				break;
 			}
 			if (grid.getSlot(i, y - dI) != state) {
@@ -103,6 +104,7 @@ public class WinDetection {
 			}
 
 			filledSlots++;
+			dI++;
 		}
 		for (int i = x - 1; i >= 0 && i <= grid.getxWidth(); i--) {
 			if (dI >= 0 && dI <= grid.getyHeight()) {
