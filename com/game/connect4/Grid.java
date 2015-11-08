@@ -40,7 +40,7 @@ public class Grid {
 			if (grid[x][i] == State.empty) {
 				grid[x][i] = state;
 
-				yCoordinate = i + 1;
+				yCoordinate = i;
 				isEmpty = true;
 
 			}
