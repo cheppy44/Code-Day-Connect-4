@@ -37,16 +37,18 @@ public class GameRunner implements Runnable {
 		List<Node> networkBNodes;
 		networkANodes = extractOutputNodes(networkA);
 		networkBNodes = extractOutputNodes(networkB);
+		networkA.setPrevailingState(State.yellow);
+		networkB.setPrevailingState(State.red);
 
 		boolean isWinner = false;
 		while (!isWinner) {
 			startTurn(networkA, networkANodes, State.yellow);
 			if (grid.winDetector.detectWin(State.yellow)) {
-				break;
+				return Player.PlayerA;
 			}
 			startTurn(networkB, networkBNodes, State.red);
 			if (grid.winDetector.detectWin(State.red)) {
-				isWinner = true;
+				return Player.PlayerB;
 			}
 		}
 

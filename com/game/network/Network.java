@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.game.connect4.Grid;
+import com.game.connect4.State;
 import com.game.exceptions.NetworkStructureException;
 
 public class Network {
@@ -18,6 +19,7 @@ public class Network {
 	private int numInputs;
 	private int numOutputs;
 	private int[] layerCounts;
+	private State goodState;
 
 	private List<Node> nodes;
 
@@ -54,6 +56,10 @@ public class Network {
 		update();
 	}
 
+	public void setPrevailingState(State state) {
+		goodState = state;
+	}
+
 	public void getInputFromGrid() { // FIXME REALLY TEST THIS WELL PLS
 		for (int i = 0; i < grid.getxWidth(); i++) {
 			for (int j = 0; j < grid.getyHeight(); j++) {
@@ -61,10 +67,18 @@ public class Network {
 				case empty:
 					break;
 				case red:
-					nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
+					if (goodState == State.red) {
+						nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
+					} else {
+						nodes.get(i + grid.getxWidth() * j).addInputWeight(0);
+					}
 					break;
 				case yellow:
-					nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
+					if (goodState == State.yellow) {
+						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
+					} else {
+						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(0);
+					}
 					break;
 				}
 			}
@@ -169,5 +183,9 @@ public class Network {
 	public int getnumInputs() {
 		// TODO Auto-generated method stub
 		return numInputs;
+	}
+
+	public void setState(State goodState) {
+		this.goodState = goodState;
 	}
 }
