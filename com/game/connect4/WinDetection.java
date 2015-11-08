@@ -35,13 +35,13 @@ public class WinDetection {
 	// Returns true if last move connected 4 horizontally
 	private boolean detect4Horizontal(int x, int y, State state) {
 		int filledSlots = 1;
-		for (int i = x + 1; i >= 0 && i <= grid.getxWidth(); i++) {
+		for (int i = x; i >= 0 && i <= grid.getxWidth(); i++) {
 			if (grid.getSlot(i, y) != state) {
 				break;
 			}
 			filledSlots++;
 		}
-		for (int i = x - 1; i >= 0 && i <= grid.getxWidth(); i--) {
+		for (int i = x; i >= 0 && i <= grid.getxWidth(); i--) {
 			if (grid.getSlot(i, y) != state) {
 				break;
 			}
@@ -56,13 +56,13 @@ public class WinDetection {
 	// Returns true if last move connected 4 vertically
 	private boolean detect4Vertical(int x, int y, State state) {
 		int filledSlots = 1;
-		for (int i = y + 1; i >= 0 && i <= grid.getyHeight(); i++) {
+		for (int i = y; i >= 0 && i <= grid.getyHeight(); i++) {
 			if (grid.getSlot(x, i) != state) {
 				break;
 			}
 			filledSlots++;
 		}
-		for (int i = y - 1; i >= 0 && i <= grid.getyHeight(); i--) {
+		for (int i = y; i >= 0 && i <= grid.getyHeight(); i--) {
 			if (grid.getSlot(x, i) != state) {
 				break;
 			}
@@ -78,17 +78,14 @@ public class WinDetection {
 	private boolean detect4DiagonalUp(int x, int y, State state) {
 		int filledSlots = 1;
 		int dI = 0;
-		for (int i = x + 1; i >= 0 && i <= grid.getxWidth(); i++) {
-			if (dI >= 0 && dI <= grid.getyHeight()) {
-				break;
-			}
+		for (int i = x; i >= 0 && i <= grid.getxWidth() && y + dI >= 0 && y + dI <= grid.getyHeight(); i++) {
 			if (grid.getSlot(i, y + dI) != state) {
 				break;
 			}
 
 			filledSlots++;
 		}
-		for (int i = x - 1; i >= 0 && i <= grid.getxWidth(); i--) {
+		for (int i = x; i >= 0 && i <= grid.getxWidth(); i--) {
 			if (dI <= 0 && dI >= grid.getyHeight()) {
 				break;
 			}
@@ -109,7 +106,7 @@ public class WinDetection {
 	private boolean detect4DiagonalDown(int x, int y, State state) {
 		int filledSlots = 1;
 		int dI = 0;
-		for (int i = x + 1; i >= 0 && i <= grid.getxWidth() && y - dI >= 0 && y - dI <= grid.getyHeight(); i++) {
+		for (int i = x; i >= 0 && i <= grid.getxWidth() && y - dI >= 0 && y - dI <= grid.getyHeight(); i++) {
 			if (grid.getSlot(i, y - dI) != state) {
 				break;
 			}
@@ -117,7 +114,7 @@ public class WinDetection {
 			filledSlots++;
 			dI++;
 		}
-		for (int i = x - 1; i >= 0 && i <= grid.getxWidth(); i--) {
+		for (int i = x; i >= 0 && i <= grid.getxWidth(); i--) {
 			if (dI >= 0 && dI <= grid.getyHeight()) {
 				break;
 			}
