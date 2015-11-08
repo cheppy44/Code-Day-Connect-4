@@ -1,5 +1,6 @@
 package com.game.evolution;
 
+import com.game.connect4.GameResult;
 import com.game.connect4.GameRunner;
 import com.game.connect4.Grid;
 import com.game.network.Network;
@@ -19,14 +20,41 @@ public class NetworkHandler implements Runnable {
 		population[0] = new Network(grid);
 		population[1] = new Network(grid);
 		population[2] = new Network(grid);
+
+		//Initialize some initial mutation here
 	}
 
 	@Override
 	public void run() {
-
+		testNetworks(population[0], population[1]); //Do something
 	}
 
-	private void compareNetworks(Network networkA, Network networkB) {
+	private void testNetworks(Network networkA, Network networkB) { //Sets the fitness level of the two networks according to the result.
+		GameResult[] gameWinners = new GameResult[2];
+		int[] gameLengths = new int[2];
 
+		gameWinners[0] = runner.startGame(networkA, networkB);
+		gameLengths[0] = runner.getGameLength();
+
+		gameWinners[1] = runner.startGame(networkB, networkA);
+		gameLengths[1] = runner.getGameLength();
+
+		for (int i = 0; i < 2; i++) {
+			switch (gameWinners[i]) {
+				case PlayerA:
+					networkA.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
+					networkB.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
+					break;
+				case PlayerB:
+					networkB.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
+					networkA.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
+					break;
+				case tie:
+					break;
+				default:
+					break;
+
+			}
+		}
 	}
 }

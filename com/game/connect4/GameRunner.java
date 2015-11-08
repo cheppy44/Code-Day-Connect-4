@@ -7,13 +7,18 @@ import com.game.network.Node;
 
 public class GameRunner {
 
-	Grid grid;
+	private Grid grid;
+	private int gameLength;
 
 	public GameRunner(Grid grid) {
 		this.grid = grid;
+		gameLength = 0;
 	}
 
-	public Player startGame(Network networkA, Network networkB) {
+	public GameResult startGame(Network networkA, Network networkB) {
+		networkA.setColor(State.red);
+		networkB.setColor(State.yellow);
+
 		grid.newGame();
 		List<Node> networkANodes;
 		List<Node> networkBNodes;
@@ -21,18 +26,23 @@ public class GameRunner {
 		networkBNodes = networkB.extractOutputNodes();
 
 		boolean isWinner = false;
-		while (!isWinner) {
+		for (int i = 0; i < grid.getArea(); i++) {
 			startTurn(networkA, networkANodes, State.yellow);
 			if (grid.winDetector.detectWin(State.yellow)) {
-				return Player.PlayerA;
+				gameLength = i;
+				return GameResult.PlayerA;
 			}
 			startTurn(networkB, networkBNodes, State.red);
 			if (grid.winDetector.detectWin(State.red)) {
-				return Player.PlayerB;
+				gameLength = i;
+				return GameResult.PlayerB;
+			}
+			if (isWinner) {
+				break;
 			}
 		}
-
-		return null;
+		gameLength = grid.getArea();
+		return GameResult.tie;
 	}
 
 	public void startTurn(Network network, List<Node> nodes, State turn) {
@@ -47,10 +57,12 @@ public class GameRunner {
 				} else {
 					placement += 2 ^ i;
 				}
-
 			}
 		}
 		grid.dropGamePiece(placement, turn);
 	}
 
+	public int getGameLength() {
+		return gameLength;
+	}
 }
