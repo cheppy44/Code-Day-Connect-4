@@ -36,7 +36,7 @@ public class Network {
 	}
 
 	public void removeNode(int index) {
-		if (index > grid.getArea()) { //makes sure that a node isn't removed from the grid board game input nodes. 
+		if (index > grid.getArea()) { //makes sure that a node isn't removed from the grid board game input nodes.
 
 		}
 	}

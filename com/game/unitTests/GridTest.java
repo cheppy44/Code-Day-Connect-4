@@ -16,8 +16,8 @@ public class GridTest {
 		int yCoordinate1 = grid.dropGamePiece(1, State.red);
 		int yCoordinate2 = grid.dropGamePiece(1, State.yellow);
 
-		assertEquals(1, yCoordinate1);
-		assertEquals(2, yCoordinate2);
+		assertEquals(0, yCoordinate1);
+		assertEquals(1, yCoordinate2);
 
 	}
 
