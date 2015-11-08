@@ -21,7 +21,6 @@ public class GameRunner implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
 	}
 
 	private Player startGame(Network networkA, Network networkB) {
@@ -46,10 +45,11 @@ public class GameRunner implements Runnable {
 		return null;
 	}
 
-	private void startTurn(Network network, List<Node> nodes, State turn) {
+	public void startTurn(Network network, List<Node> nodes, State turn) {
 		// TODO Auto-generated method stub
 		network.update();
 		int placement = 0;
+		// Converts from trinary nodes to integer
 		for (int i = 0; i <= nodes.size(); i++) {
 			if (nodes.get(i).calcOutput()) {
 				if (i == 0) {

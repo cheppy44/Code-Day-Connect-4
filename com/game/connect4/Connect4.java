@@ -2,7 +2,6 @@ package com.game.connect4;
 
 import com.game.evolution.NetworkHandler;
 import com.game.graphics.GUI;
-import com.game.network.Network;
 import com.game.network.NetworkVisualizer;
 
 public class Connect4 {
@@ -15,9 +14,7 @@ public class Connect4 {
 	public Connect4() {
 		handler = new NetworkHandler();
 		gameGrid = new Grid(7, 6);
-		network = new Network(gameGrid);
 		new Thread(gui = new GUI(gameGrid));
-		new Thread(visualizer = new NetworkVisualizer(network.getNodes()));
 		visualizer.start();
 		gui.start();
 
