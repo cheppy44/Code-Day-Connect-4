@@ -55,16 +55,6 @@ public class Network {
 		connectAllAdjacentNodes();
 	}
 
-	public Network(Network network) {
-		this.fitnessLevel = network.fitnessLevel;
-		this.goodState = network.goodState;
-		this.grid = network.grid;
-		this.layerCounts = network.layerCounts;
-		this.nodes = network.nodes;
-		this.numInputs = network.numInputs;
-		this.numOutputs = network.numOutputs;
-	}
-
 	public void startTurn() {
 		update();
 	}
