@@ -6,7 +6,7 @@ public class Connection {
 	private int startIndex;
 	private int endIndex;
 
-	public Connection(double usageWeight, int startIndex, int endIndex) {
+	public Connection(int startIndex, int endIndex, double usageWeight) {
 		this.usageWeight = usageWeight;
 		this.startIndex = startIndex;
 		this.endIndex = endIndex;

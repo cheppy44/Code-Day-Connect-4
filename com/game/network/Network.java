@@ -1,6 +1,7 @@
 package com.game.network;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.game.connect4.Grid;
@@ -21,7 +22,7 @@ public class Network {
 	private List<Node> nodes;
 
 	public Network(Grid grid) {
-		this.grid = grid;
+		this.grid = grid; // FIXME testing this
 		numInputs = grid.getArea() * 2;
 		numOutputs = grid.getxWidth();
 		layerCounts = new int[numLayers];
@@ -46,7 +47,6 @@ public class Network {
 				layerCounts[i]++;
 			}
 		}
-
 		connectAllAdjacentNodes();
 	}
 
@@ -110,11 +110,12 @@ public class Network {
 		} else if (startLayerNum > endLayerNum) {
 			throw new NetworkStructureException("Invalid network structure");
 		} else {
+			LinkedList<Node> nodeLinked = new LinkedList<Node>(nodes);
 			int startPoint = 0;
 			int endPoint = 0;
 			boolean success = false, startFound = false, endFound = false;
 			int i = 0;
-			for (Node n : nodes) {
+			for (Node n : nodeLinked) {
 				if (n.getLayerNum() == startLayerNum && n.getLayerHeight() == startLayerPos) {
 					startPoint = i;
 					startFound = true;

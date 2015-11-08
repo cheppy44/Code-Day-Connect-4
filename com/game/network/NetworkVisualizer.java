@@ -52,7 +52,6 @@ public class NetworkVisualizer implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println("hi");
 		screen.update(nodeData);
 		frame.repaint();
 	}
