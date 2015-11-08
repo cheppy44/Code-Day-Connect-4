@@ -38,6 +38,13 @@ public class NetworkHandler implements Runnable {
 		population[1] = Mutator.mutate(population[2]);
 	}
 
+	public void start() {
+		boolean running = true;
+		while (running) {
+			run();
+		}
+	}
+
 	private void testNetworks(Network networkA, Network networkB, boolean sneakyBoolean) { // Sets
 																							// the
 																							// fitness
