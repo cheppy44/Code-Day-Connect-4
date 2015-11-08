@@ -11,7 +11,7 @@ public abstract class Mutator {
 
 	public static Network mutate(Network network) {
 		Network mutated = network;
-		Random randGen = new Random();
+		Random randGen = new Random(System.currentTimeMillis());
 		for (Node n : network.getNodes()) {
 			for (Connection c : n.getOutputConnections()) {
 				if (randGen.nextInt(getActivationProbability(network)) == 1) {
@@ -28,7 +28,7 @@ public abstract class Mutator {
 	// }
 
 	public static void mutateWeight(Connection c) {
-		Random randGen = new Random();
+		Random randGen = new Random(System.currentTimeMillis());
 		double weight = randGen.nextDouble() * 3;
 		if (randGen.nextBoolean()) {
 			weight = -weight;

@@ -12,7 +12,7 @@ public class Network {
 	private static final int numLayers = 5; // TODO Play with these values in
 											// the evolution stage
 	private static final int nodesPerLayer = 5;
-	private static final int DEFAULT_USAGE_WEIGHT = 0;
+	private static final int DEFAULT_USAGE_WEIGHT = 1;
 
 	private Grid grid;
 	private int numInputs;
