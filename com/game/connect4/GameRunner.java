@@ -8,15 +8,9 @@ import com.game.network.Node;
 public class GameRunner implements Runnable {
 
 	Grid grid;
-	Network parentNetwork;
-	Network childANetwork;
-	Network childBNetwork;
 
 	public GameRunner(Grid grid) {
 		this.grid = grid;
-		parentNetwork = new Network(grid);
-		childANetwork = new Network(grid);
-		childBNetwork = new Network(grid);
 	}
 
 	public static void main(String[] args) {
@@ -27,7 +21,6 @@ public class GameRunner implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		Player Winner = startGame(childANetwork, childBNetwork);
 
 	}
 
@@ -35,10 +28,8 @@ public class GameRunner implements Runnable {
 		grid.newGame();
 		List<Node> networkANodes;
 		List<Node> networkBNodes;
-		networkANodes = extractOutputNodes(networkA);
-		networkBNodes = extractOutputNodes(networkB);
-		networkA.setPrevailingState(State.yellow);
-		networkB.setPrevailingState(State.red);
+		networkANodes = networkA.extractOutputNodes();
+		networkBNodes = networkB.extractOutputNodes();
 
 		boolean isWinner = false;
 		while (!isWinner) {
@@ -70,15 +61,6 @@ public class GameRunner implements Runnable {
 			}
 		}
 		grid.dropGamePiece(placement, turn);
-	}
-
-	private List<Node> extractOutputNodes(Network network) {
-		List<Node> nodes = network.getNodes();
-		List<Node> outputNodes = null;
-		for (int i = network.getnumOutputs(); i < network.getnumOutputs() + network.getnumInputs(); i++) {
-			outputNodes.add(nodes.get(i));
-		}
-		return outputNodes;
 	}
 
 }

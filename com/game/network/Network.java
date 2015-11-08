@@ -9,10 +9,9 @@ import com.game.connect4.State;
 import com.game.exceptions.NetworkStructureException;
 
 public class Network {
-
-	private static final int numLayers = 100; // TODO Play with these values in
-												// the evolution stage
-	private static final int nodesPerLayer = 100;
+	private static final int numLayers = 4; // TODO Play with these values in
+											// the evolution stage
+	private static final int nodesPerLayer = 4;
 	private static final int DEFAULT_USAGE_WEIGHT = 1;
 
 	private Grid grid;
@@ -23,13 +22,17 @@ public class Network {
 
 	private List<Node> nodes;
 
+	private int fitnessLevel;
+
 	public Network(Grid grid) {
 		this.grid = grid; // FIXME testing this
 		numInputs = grid.getArea() * 2;
-		numOutputs = grid.getxWidth();
+		numOutputs = 3;
 		layerCounts = new int[numLayers];
 
 		nodes = new ArrayList<Node>();
+
+		fitnessLevel = 0;
 
 		// The first area nodes are "input nodes"
 		// The next xWidth nodes are "output nodes"
@@ -43,7 +46,7 @@ public class Network {
 			layerCounts[numLayers - 1]++;
 		}
 
-		for (int i = 0; i < numLayers; i++) { // Sets up the hidden layers
+		for (int i = 1; i < numLayers - 1; i++) { // Sets up the hidden layers
 			for (int j = 0; j < nodesPerLayer; j++) {
 				nodes.add(new Node(i, j));
 				layerCounts[i]++;
@@ -155,18 +158,13 @@ public class Network {
 	public void connectAllAdjacentNodes() {
 		for (Node n : nodes) {
 			int nextConnectionLayer = n.getLayerNum() + 1;
-			if (nextConnectionLayer < numLayers) { // is this right or is it
-													// layercounts.length()?
-				while (layerCounts[nextConnectionLayer] == 0) {
-					nextConnectionLayer++;
-				}
-			}
-
-			for (int i = 0; i < layerCounts[nextConnectionLayer]; i++) {
-				try {
-					connectNodes(n.getLayerNum(), n.getLayerHeight(), nextConnectionLayer, i);
-				} catch (NetworkStructureException e) {
-					e.printStackTrace();
+			if (nextConnectionLayer < layerCounts.length) {
+				for (int i = 0; i < layerCounts[nextConnectionLayer]; i++) {
+					try {
+						connectNodes(n.getLayerNum(), n.getLayerHeight(), nextConnectionLayer, i);
+					} catch (NetworkStructureException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -185,7 +183,19 @@ public class Network {
 		return numInputs;
 	}
 
-	public void setState(State goodState) {
-		this.goodState = goodState;
+	public int getFitnessLevel() {
+		return fitnessLevel;
+	}
+
+	public void setFitnessLevel(int fitnessLevel) {
+		this.fitnessLevel = fitnessLevel;
+	}
+
+	public List<Node> extractOutputNodes() {
+		List<Node> outputNodes = new ArrayList<Node>();
+		for (int i = numOutputs; i < numOutputs + numInputs; i++) {
+			outputNodes.add(nodes.get(i));
+		}
+		return outputNodes;
 	}
 }
