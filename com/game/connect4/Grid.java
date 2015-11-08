@@ -33,7 +33,10 @@ public class Grid {
 
 	// Decides where to place a game piece based on a slot on the X plane and
 	// returns yCoordinate
-	public int dropGamePiece(int x, State state) {
+	public int dropGamePiece(int x, State state) throws Exception {
+		if (x < 0 || x >= xWidth) {
+			throw (new Exception());
+		}
 		boolean isEmpty = false;
 		int yCoordinate = 0;
 		for (int i = 0; !isEmpty; i++) {
