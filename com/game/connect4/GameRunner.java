@@ -51,20 +51,24 @@ public class GameRunner {
 	public void startTurn(Network network, List<Node> nodes, State turn) {
 		// TODO Auto-generated method stub
 		network.update();
+		System.out.println(network.getNodes().get(0).toString());
 		int placement = 0;
 		// Converts from trinary nodes to integer
 		for (int i = 0; i < nodes.size(); i++) {
 			if (nodes.get(i).calcOutput()) {
 				if (i == 0) {
 					placement += 1;
-				} else {
-					placement += 2 ^ i;
+				} else if (i == 1) {
+					placement += 2;
+				} else if (i == 2) {
+					placement += 4;
 				}
 			}
 		}
 		if (placement != 0) {
 			grid.dropGamePiece(placement - 1, turn);
 		}
+		// System.out.println("slot " + placement);
 	}
 
 	public int getGameLength() {

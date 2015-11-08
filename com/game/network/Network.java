@@ -9,9 +9,9 @@ import com.game.connect4.State;
 import com.game.exceptions.NetworkStructureException;
 
 public class Network {
-	private static final int numLayers = 20; // TODO Play with these values in
-												// the evolution stage
-	private static final int nodesPerLayer = 20;
+	private static final int numLayers = 5; // TODO Play with these values in
+											// the evolution stage
+	private static final int nodesPerLayer = 5;
 	private static final int DEFAULT_USAGE_WEIGHT = 1;
 
 	private Grid grid;
@@ -64,24 +64,17 @@ public class Network {
 	}
 
 	public void getInputFromGrid() { // FIXME REALLY TEST THIS WELL PLS
+		nodes.get(0).addInputWeight(1);
 		for (int i = 0; i < grid.getxWidth(); i++) {
 			for (int j = 0; j < grid.getyHeight(); j++) {
 				switch (grid.getState()[i][j]) {
 				case empty:
 					break;
 				case red:
-					if (goodState == State.red) {
-						nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
-					} else {
-						nodes.get(i + grid.getxWidth() * j).addInputWeight(0);
-					}
+					nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
 					break;
 				case yellow:
-					if (goodState == State.yellow) {
-						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
-					} else {
-						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(0);
-					}
+					nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
 					break;
 				default:
 					break;
@@ -107,8 +100,8 @@ public class Network {
 	public void update() {
 		getInputFromGrid();
 		for (int i = 0; i < numLayers; i++) {
-			nodeOutput();
 			connectionOutput();
+			nodeOutput();
 		}
 	}
 

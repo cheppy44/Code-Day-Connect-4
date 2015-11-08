@@ -1,5 +1,6 @@
 package com.game.evolution;
 
+import java.util.List;
 import java.util.Random;
 
 import com.game.connect4.GameResult;
@@ -7,6 +8,7 @@ import com.game.connect4.GameRunner;
 import com.game.connect4.Grid;
 import com.game.graphics.GUI;
 import com.game.network.Network;
+import com.game.network.Node;
 
 public class NetworkHandler implements Runnable {
 
@@ -44,6 +46,7 @@ public class NetworkHandler implements Runnable {
 		population[0] = Mutator.mutate(population[2]); // Need to define mutate
 		population[1] = Mutator.mutate(population[2]);
 		generation++;
+
 	}
 
 	public void start(GUI gui) {
@@ -54,26 +57,20 @@ public class NetworkHandler implements Runnable {
 		}
 	}
 
-	private void testNetworks(Network networkA, Network networkB, boolean sneakyBoolean) { // Sets
-																							// the
-																							// fitness
-																							// level
-																							// of
-																							// the
-																							// two
-																							// networks
-																							// according
-																							// to
-																							// the
-																							// result.
+	private void testNetworks(Network networkA, Network networkB, boolean sneakyBoolean) {
 		GameResult[] gameWinners = new GameResult[2];
 		int[] gameLengths = new int[2];
 
+		List<Node> nodes = population[0].getNodes();
+		System.out.println(nodes.get(0));
+
 		gameWinners[0] = runner.startGame(networkA, networkB);
 		gameLengths[0] = runner.getGameLength();
+		System.out.println(gameWinners[0]);
 
 		gameWinners[1] = runner.startGame(networkB, networkA);
 		gameLengths[1] = runner.getGameLength();
+		System.out.println(gameWinners[1]);
 
 		for (int i = 0; i < 2; i++) {
 			switch (gameWinners[i]) {

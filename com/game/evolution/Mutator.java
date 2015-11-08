@@ -9,25 +9,13 @@ import com.game.network.Node;
 public abstract class Mutator {
 	private static final int MUTATION_PROBABILITY_MULTIPLIER = 10;
 
-	public static Network mutate(Network network) { // The amount of mutation is
-													// based on the fitness
-													// level of the network
+	public static Network mutate(Network network) {
 		Network mutated = network;
-		System.out.println("mutation");
-		Random randGen = new Random(); // TODO Determine if this actually will
-										// generate new numbers every time it's
-										// called
+		Random randGen = new Random();
 		for (Node n : network.getNodes()) {
 			for (Connection c : n.getOutputConnections()) {
-				if (randGen.nextInt(getActivationProbability(network)) == 0) { // Will
-																				// this
-																				// derp
-																				// if
-																				// the
-																				// activiation
-																				// probability
-																				// is
-																				// 0?
+				if (randGen.nextInt(getActivationProbability(network)) == 0) {
+					// System.out.println("mutation");
 					mutateWeight(c);
 				}
 			}
@@ -43,10 +31,10 @@ public abstract class Mutator {
 	public static void mutateWeight(Connection c) {
 		Random randGen = new Random();
 		double weight = randGen.nextDouble() * 3;
-		if (randGen.nextBoolean()) {
-			weight = -weight;
-		}
-
+		// if (randGen.nextBoolean()) {
+		// weight = -weight;
+		// }
+		System.out.println("New weight" + weight);
 		c.setUsageWeight(weight);
 
 	}

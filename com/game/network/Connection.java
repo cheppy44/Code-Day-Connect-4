@@ -1,7 +1,7 @@
 package com.game.network;
 
 public class Connection {
-	private static final double USAGE_WEIGHT_OUTPUT_THRESH = 4;
+	private static final double USAGE_WEIGHT_OUTPUT_THRESH = 2;
 	private boolean state;
 	private double usageWeight;
 	private int startIndex;
@@ -42,6 +42,7 @@ public class Connection {
 	}
 
 	public double getOutput() {
+		// System.out.println(usageWeight);
 		if (state || usageWeight > USAGE_WEIGHT_OUTPUT_THRESH) {
 			return usageWeight;
 		} else {
