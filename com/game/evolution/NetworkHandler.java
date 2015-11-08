@@ -50,11 +50,9 @@ public class NetworkHandler implements Runnable {
 
 	public void start(GUI gui) {
 		boolean running = true;
-		int i = 0;
 		while (running) {
 			run();
 			gui.update();
-			i++;
 		}
 	}
 
@@ -88,14 +86,14 @@ public class NetworkHandler implements Runnable {
 		}
 		if (networkA.getFitnessLevel() > networkB.getFitnessLevel()) {
 			if (sneakyBoolean) {
-				population[3] = population[0];
+				population[3] = new Network(population[0]);
 			} // Else do nothing, as population[2] will stay the same
 
 		} else if (networkB.getFitnessLevel() > networkB.getFitnessLevel()) {
 			if (sneakyBoolean) {
-				population[3] = population[1];
+				population[3] = new Network(population[1]);
 			} else {
-				population[2] = population[3];
+				population[2] = new Network(population[3]);
 			}
 
 		} else {
@@ -103,13 +101,13 @@ public class NetworkHandler implements Runnable {
 			int rand = randGen.nextInt(2);
 			if (rand == 0) {
 				if (sneakyBoolean) {
-					population[3] = population[0];
+					population[3] = new Network(population[0]);
 				} // Else do nothing, as population[2] will stay the same
 			} else {
 				if (sneakyBoolean) {
-					population[3] = population[1];
+					population[3] = new Network(population[1]);
 				} else {
-					population[2] = population[3];
+					population[2] = new Network(population[3]);
 				}
 			}
 		}

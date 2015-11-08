@@ -19,7 +19,7 @@ public class Connect4 {
 		handler = new NetworkHandler(gameGrid);
 		handler.start(gui);
 		// visualizer = new NetworkVisualizer(network.getNodes()));
-		// //Visualization lives here when we want to enable that again
+		// Visualization lives here when we want to enable that again
 		// visualizer.start();
 	}
 
