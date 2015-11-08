@@ -8,7 +8,8 @@ import com.game.exceptions.NetworkStructureException;
 
 public class Network {
 
-	private static final int numLayers = 100; //TODO Play with these values in the evolution stage
+	private static final int numLayers = 100; // TODO Play with these values in
+												// the evolution stage
 	private static final int nodesPerLayer = 100;
 	private static final int DEFAULT_USAGE_WEIGHT = 1;
 
@@ -27,19 +28,19 @@ public class Network {
 
 		nodes = new ArrayList<Node>();
 
-		//The first area nodes are "input nodes"
-		//The next xWidth nodes are "output nodes"
-		for (int i = 0; i < numInputs; i++) { //sets up the input nodes
+		// The first area nodes are "input nodes"
+		// The next xWidth nodes are "output nodes"
+		for (int i = 0; i < numInputs; i++) { // sets up the input nodes
 			nodes.add(new Node(0, layerCounts[0]));
 			layerCounts[0]++;
 		}
 
-		for (int i = 0; i < numOutputs; i++) { //Sets up the output nodes
+		for (int i = 0; i < numOutputs; i++) { // Sets up the output nodes
 			nodes.add(new Node(numLayers - 1, layerCounts[numLayers - 1]));
 			layerCounts[numLayers - 1]++;
 		}
 
-		for (int i = 0; i < numLayers; i++) { //Sets up the hidden layers
+		for (int i = 0; i < numLayers; i++) { // Sets up the hidden layers
 			for (int j = 0; j < nodesPerLayer; j++) {
 				nodes.add(new Node(i, j));
 				layerCounts[i]++;
@@ -49,18 +50,18 @@ public class Network {
 		connectAllAdjacentNodes();
 	}
 
-	public void getInputFromGrid() { //FIXME REALLY TEST THIS WELL PLS
+	public void getInputFromGrid() { // FIXME REALLY TEST THIS WELL PLS
 		for (int i = 0; i < grid.getxWidth(); i++) {
 			for (int j = 0; j < grid.getyHeight(); j++) {
 				switch (grid.getState()[i][j]) {
-					case empty:
-						break;
-					case red:
-						nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
-						break;
-					case yellow:
-						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
-						break;
+				case empty:
+					break;
+				case red:
+					nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
+					break;
+				case yellow:
+					nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
+					break;
 				}
 			}
 		}
@@ -88,9 +89,12 @@ public class Network {
 		}
 	}
 
-	//BEGIN UTILS FOR NETWORK SETUP HERE
+	// BEGIN UTILS FOR NETWORK SETUP HERE
 
-	public void connectNodes(int startLayerNum, int startLayerPos, int endLayerNum, int endLayerPos) throws NetworkStructureException { //connects two nodes based on the coordinats of the nodes inputted
+	public void connectNodes(int startLayerNum, int startLayerPos, int endLayerNum, int endLayerPos)
+			throws NetworkStructureException { // connects two nodes based on
+												// the coordinats of the nodes
+												// inputted
 		if (startLayerNum < 0 || startLayerNum > numLayers - 1) {
 			throw new NetworkStructureException("Invalid network structure");
 
@@ -132,7 +136,8 @@ public class Network {
 	public void connectAllAdjacentNodes() {
 		for (Node n : nodes) {
 			int nextConnectionLayer = n.getLayerNum() + 1;
-			if (nextConnectionLayer < numLayers) { //is this right or is it layercounts.length()?
+			if (nextConnectionLayer < numLayers) { // is this right or is it
+													// layercounts.length()?
 				while (layerCounts[nextConnectionLayer] == 0) {
 					nextConnectionLayer++;
 				}
@@ -150,5 +155,14 @@ public class Network {
 
 	public List<Node> getNodes() {
 		return nodes;
+	}
+
+	public int getnumOutputs() {
+		return numOutputs;
+	}
+
+	public int getnumInputs() {
+		// TODO Auto-generated method stub
+		return numInputs;
 	}
 }

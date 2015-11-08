@@ -1,5 +1,7 @@
 package com.game.connect4;
 
+import com.game.network.Connection;
+
 public class Grid {
 
 	private int xWidth;
@@ -8,6 +10,7 @@ public class Grid {
 
 	private State[][] grid;
 	public WinDetection winDetector;
+	private Connection[] outputs;
 
 	public Grid(int xWidth, int yHeight) {
 		this.xWidth = xWidth;
@@ -80,7 +83,7 @@ public class Grid {
 	public int getArea() {
 		return area;
 	}
-	
+
 	public State[][] getGrid() {
 		return grid;
 	}
