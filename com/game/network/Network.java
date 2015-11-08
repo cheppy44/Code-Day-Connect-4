@@ -32,6 +32,28 @@ public class Network {
 		for (int i = 0; i < numOutputs; i++) {
 			nodes.add(new Node(numLayers, i));
 		}
+	}
 
+	public void addConnection() {
+
+	}
+
+	public void update() {
+		nodeOutput();
+		connectionOutput();
+	}
+
+	public void nodeOutput() {
+		for (Node n : nodes) {
+			n.outputToConnections();
+		}
+	}
+
+	public void connectionOutput() {
+		for (Node n : nodes) {
+			for (Connection c : n.getOutputConnections()) {
+				nodes.get(c.getEndIndex()).addInputWeight(c.getOutput());
+			}
+		}
 	}
 }
