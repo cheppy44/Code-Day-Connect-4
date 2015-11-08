@@ -1,48 +1,57 @@
 package com.game.network;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.game.connect4.State;
+public class Node {
+	private int layerNum;
+	private int layerHeight;
 
-public class Node { //Once a node exists. If it doens't have two inputs, find some using randomness.
+	private List<Connection> outputConnections;
+	private List<Double> inputWeights;
 
-	private List<Synapse> inputs;
-
-	private State state;
-	private int nodeIndex;
-
-	public Node(int nodeIndex) {
-		this.nodeIndex = nodeIndex;
+	public Node(int layerNum, int layerHeight) {
+		inputWeights = new ArrayList<Double>();
+		outputConnections = new ArrayList<Connection>();
+		this.layerNum = layerNum;
+		this.layerHeight = layerHeight;
 	}
 
-	public void addInput(Synapse synapse) {
-		if (inputs.size() < 2) {
-			inputs.add(synapse);
+	public void addInputWeight(double input) {
+		inputWeights.add(input);
+	}
+
+	public void outputToConnections() {
+		boolean output = calcOutput();
+		inputWeights.clear();
+		for (Connection c : outputConnections) {
+			c.setState(output);
 		}
 	}
 
-	public void setState(State input) {
-		this.state = input;
+	public boolean calcOutput() {
+		double weightSum = 0;
+		for (double d : inputWeights) {
+			weightSum += d;
+		}
+
+		return weightSum / inputWeights.size() >= 1;
 	}
 
-	public void setInputs(List<Synapse> inputs) {
-		this.inputs = inputs;
+	public int getLayerNum() {
+		return layerNum;
 	}
 
-	public int getNodeIndex() {
-		return nodeIndex;
+	public int getLayerHeight() {
+		return layerHeight;
 	}
 
-	public void setNodeIndex(int nodeIndex) {
-		this.nodeIndex = nodeIndex;
+	public void addConnection(Connection c) {
+		outputConnections.add(c);
 	}
 
-	public State getState() {
-		return state;
-	}
-
-	public List<Synapse> getInputs() {
-		return inputs;
+	public List<Connection> getOutputConnections() {
+		return outputConnections;
 	}
 
 }
