@@ -6,8 +6,7 @@ import com.game.connect4.State;
 
 public class Node { //Once a node exists. If it doens't have two inputs, find some using randomness.
 
-	private List<Synapse> inputs; //Must not be greater than 2
-	private List<Synapse> outputs;
+	private List<Synapse> inputs;
 
 	private State state;
 	private int nodeIndex;
@@ -16,24 +15,18 @@ public class Node { //Once a node exists. If it doens't have two inputs, find so
 		this.nodeIndex = nodeIndex;
 	}
 
+	public void addInput(Synapse synapse) {
+		if (inputs.size() < 2) {
+			inputs.add(synapse);
+		}
+	}
+
 	public void setState(State input) {
 		this.state = input;
 	}
 
-	public List<Synapse> getInputs() {
-		return inputs;
-	}
-
 	public void setInputs(List<Synapse> inputs) {
 		this.inputs = inputs;
-	}
-
-	public List<Synapse> getOutputs() {
-		return outputs;
-	}
-
-	public void setOutputs(List<Synapse> outputs) {
-		this.outputs = outputs;
 	}
 
 	public int getNodeIndex() {
@@ -46,6 +39,10 @@ public class Node { //Once a node exists. If it doens't have two inputs, find so
 
 	public State getState() {
 		return state;
+	}
+
+	public List<Synapse> getInputs() {
+		return inputs;
 	}
 
 }

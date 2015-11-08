@@ -14,10 +14,10 @@ public class NetworkTest {
 		Grid grid = new Grid(7, 6);
 		Network network = new Network(grid);
 
-		for (int i = 0; i < network.getNodes().size(); i++) {
-			network.update();
+		for (int i = 0; i < grid.getArea(); i++) {
+			network.updateData();
 			assertEquals(network.getNodes().get(i).getNodeIndex(), i);
 		}
-
+		network.addNewNode();
 	}
 }
