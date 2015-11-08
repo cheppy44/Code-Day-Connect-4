@@ -18,8 +18,8 @@ public class Grid {
 
 	//Sets full grid to empty
 	public void newGame() {
-		for (int x = 1; x <= xWidth; x++) {
-			for (int y = 1; y <= yHeight; y++) {
+		for (int x = 0; x < xWidth; x++) {
+			for (int y = 0; y < yHeight; y++) {
 				grid[x][y] = State.empty;
 			}
 		}

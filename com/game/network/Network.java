@@ -25,4 +25,8 @@ public class Network {
 	public void addNewNode() {
 
 	}
+
+	public List<Node> getNodes() {
+		return nodes;
+	}
 }
