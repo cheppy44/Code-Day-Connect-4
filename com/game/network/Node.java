@@ -5,16 +5,16 @@ import java.util.List;
 
 public class Node {
 	private int layerNum;
-	private int layerHeighht;
+	private int layerHeight;
 
 	private List<Connection> outputConnections;
 	private List<Double> inputWeights;
 
-	public Node(int layerNum, int layerHeighht) {
+	public Node(int layerNum, int layerHeight) {
 		inputWeights = new ArrayList<Double>();
 		outputConnections = new ArrayList<Connection>();
 		this.layerNum = layerNum;
-		this.layerHeighht = layerHeighht;
+		this.layerHeight = layerHeight;
 	}
 
 	public void addInputWeight(double input) {
@@ -33,6 +33,14 @@ public class Node {
 		}
 
 		return weightSum / inputWeights.size() >= 1;
+	}
+
+	public int getLayerNum() {
+		return layerNum;
+	}
+
+	public int getLayerHeight() {
+		return layerHeight;
 	}
 
 	public void addConnection(Connection c) {
