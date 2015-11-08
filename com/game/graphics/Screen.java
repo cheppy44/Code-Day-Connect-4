@@ -59,7 +59,7 @@ public class Screen {
 				} else {
 					g.setColor(Color.black);
 				}
-				g.fillOval(x * xRect, (6 - y) * yRect, widthRect - CirW, heightRect - CirH);
+				g.fillOval(x * xRect + 50, (6 - y) * yRect, widthRect - CirW, heightRect - CirH);
 			}
 		}
 

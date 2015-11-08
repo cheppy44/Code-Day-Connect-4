@@ -23,11 +23,6 @@ public class GameRunner {
 		grid.newGame();
 
 		grid.dropGamePiece(0, State.yellow);
-		grid.dropGamePiece(0, State.red);
-		grid.dropGamePiece(0, State.red);
-		grid.dropGamePiece(0, State.red);
-		grid.dropGamePiece(0, State.yellow);
-		grid.dropGamePiece(0, State.red);
 
 		grid.dropGamePiece(1, State.yellow);
 		grid.dropGamePiece(1, State.red);

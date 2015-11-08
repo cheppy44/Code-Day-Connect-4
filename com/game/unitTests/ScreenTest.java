@@ -21,7 +21,7 @@ public class ScreenTest {
 		grid.dropGamePiece(1, State.yellow);
 		grid.dropGamePiece(2, State.red);
 		grid.dropGamePiece(3, State.red);
-		gui.run();
+		//gui.run();
 	}
 
 }
