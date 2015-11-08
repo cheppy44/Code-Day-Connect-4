@@ -12,7 +12,7 @@ public class HorizontalWinDetectionTest {
 	private Grid grid;
 
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		Connect4 game = new Connect4();
 		grid = game.gameGrid;
 		grid.newGame();
