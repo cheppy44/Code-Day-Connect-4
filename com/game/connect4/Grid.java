@@ -45,6 +45,7 @@ public class Grid {
 
 				yCoordinate = i;
 				isEmpty = true;
+				break;
 
 			}
 		}
