@@ -50,6 +50,10 @@ public class Network {
 		connectAllAdjacentNodes();
 	}
 
+	public void startTurn() {
+		update();
+	}
+
 	public void getInputFromGrid() { // FIXME REALLY TEST THIS WELL PLS
 		for (int i = 0; i < grid.getxWidth(); i++) {
 			for (int j = 0; j < grid.getyHeight(); j++) {

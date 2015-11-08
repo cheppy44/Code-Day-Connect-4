@@ -36,8 +36,38 @@ public class GameRunner implements Runnable {
 		List<Node> networkANodes;
 		List<Node> networkBNodes;
 		networkANodes = extractOutputNodes(networkA);
+		networkBNodes = extractOutputNodes(networkB);
+
+		boolean isWinner = false;
+		while (!isWinner) {
+			startTurn(networkA, networkANodes, State.yellow);
+			if (grid.winDetector.detectWin(State.yellow)) {
+				break;
+			}
+			startTurn(networkB, networkBNodes, State.red);
+			if (grid.winDetector.detectWin(State.red)) {
+				isWinner = true;
+			}
+		}
 
 		return null;
+	}
+
+	private void startTurn(Network network, List<Node> nodes, State turn) {
+		// TODO Auto-generated method stub
+		network.update();
+		int placement = 0;
+		for (int i = 0; i <= nodes.size(); i++) {
+			if (nodes.get(i).calcOutput()) {
+				if (i == 0) {
+					placement += 1;
+				} else {
+					placement += 2 ^ i;
+				}
+
+			}
+		}
+		grid.dropGamePiece(placement, turn);
 	}
 
 	private List<Node> extractOutputNodes(Network network) {

@@ -2,6 +2,8 @@ package com.game.connect4;
 
 public class WinDetection {
 	private Grid grid;
+	static int lastMoveX;
+	static int lastMoveY;
 
 	public WinDetection(Grid grid) {
 		this.grid = grid;
@@ -9,6 +11,17 @@ public class WinDetection {
 
 	// Returns true if any win condition returns true
 	public boolean detectWin(int lastMoveX, int lastMoveY, State lastPlayer) {
+
+		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer)
+				|| detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
+				|| detect4DiagonalDown(lastMoveX, lastMoveY, lastPlayer)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean detectWin(State lastPlayer) {
 
 		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer)
 				|| detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
