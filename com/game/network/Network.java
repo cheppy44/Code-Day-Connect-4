@@ -46,6 +46,47 @@ public class Network {
 		}
 	}
 
+	public void getInputFromGrid() { //FIXME REALLY TEST THIS WELL PLS
+		for (int i = 0; i < grid.getxWidth(); i++) {
+			for (int j = 0; j < grid.getyHeight(); j++) {
+				switch (grid.getState()[i][j]) {
+					case empty:
+						break;
+					case red:
+						nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
+						break;
+					case yellow:
+						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
+						break;
+				}
+			}
+		}
+	}
+
+	public void nodeOutput() {
+		for (Node n : nodes) {
+			n.outputToConnections();
+		}
+	}
+
+	public void connectionOutput() {
+		for (Node n : nodes) {
+			for (Connection c : n.getOutputConnections()) {
+				nodes.get(c.getEndIndex()).addInputWeight(c.getOutput());
+			}
+		}
+	}
+
+	public void update() {
+		getInputFromGrid();
+		for (int i = 0; i < numLayers; i++) {
+			nodeOutput();
+			connectionOutput();
+		}
+	}
+
+	//BEGIN UTILS FOR NETWORK SETUP HERE
+
 	public void connectNodes(int startLayerNum, int startLayerPos, int endLayerNum, int endLayerPos) throws NetworkStructureException { //connects two nodes based on the coordinats of the nodes inputted
 		if (startLayerNum < 0 || startLayerNum > numLayers - 1) {
 			throw new NetworkStructureException("Invalid network structure");
@@ -85,21 +126,11 @@ public class Network {
 		}
 	}
 
-	public void update() {
-		nodeOutput();
-		connectionOutput();
-	}
-
-	public void nodeOutput() {
+	public void connectAllAdjacentNodes() {
 		for (Node n : nodes) {
-			n.outputToConnections();
-		}
-	}
+			int nextConnectionLayer = n.getLayerNum() + 1;
+			if (nextConnectionLayer < numLayers) { //is this right or
 
-	public void connectionOutput() {
-		for (Node n : nodes) {
-			for (Connection c : n.getOutputConnections()) {
-				nodes.get(c.getEndIndex()).addInputWeight(c.getOutput());
 			}
 		}
 	}

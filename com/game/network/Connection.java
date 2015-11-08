@@ -28,6 +28,10 @@ public class Connection {
 		this.endIndex = endIndex;
 	}
 
+	public void setState(boolean state) {
+		this.state = state;
+	}
+
 	public double getOutput() {
 		if (state) {
 			return usageWeight;

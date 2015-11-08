@@ -24,6 +24,9 @@ public class Node {
 	public void outputToConnections() {
 		boolean output = calcOutput();
 		inputWeights.clear();
+		for (Connection c : outputConnections) {
+			c.setState(output);
+		}
 	}
 
 	public boolean calcOutput() {
