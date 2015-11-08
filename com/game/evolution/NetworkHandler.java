@@ -28,7 +28,7 @@ public class NetworkHandler implements Runnable {
 	}
 
 	@Override
-	public void run() {
+	public void run() { //I need a loop in here
 		testNetworks(population[0], population[1], true);
 		testNetworks(population[2], population[3], false);
 
