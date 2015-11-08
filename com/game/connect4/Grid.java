@@ -42,7 +42,7 @@ public class Grid {
 		}
 		boolean isEmpty = false;
 		int yCoordinate = 0;
-		for (int i = 0; !isEmpty; i++) {
+		for (int i = 0; !isEmpty && i < yHeight; i++) {
 			if (grid[x][i] == State.empty) {
 				grid[x][i] = state;
 
@@ -51,6 +51,9 @@ public class Grid {
 				break;
 
 			}
+		}
+		if (!isEmpty) {
+			yCoordinate = yHeight + 1;
 		}
 
 		return yCoordinate;

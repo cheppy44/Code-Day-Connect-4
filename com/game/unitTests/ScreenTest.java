@@ -1,5 +1,7 @@
 package com.game.unitTests;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.game.connect4.Grid;
@@ -14,6 +16,8 @@ public class ScreenTest {
 	public void test() {
 		grid = new Grid(7, 6);
 		gui = new GUI(grid);
+		Thread t = new Thread(gui);
+		t.start();
 		grid.newGame();
 		grid.dropGamePiece(0, State.yellow);
 		grid.dropGamePiece(0, State.red);
@@ -21,7 +25,8 @@ public class ScreenTest {
 		grid.dropGamePiece(1, State.yellow);
 		grid.dropGamePiece(2, State.red);
 		grid.dropGamePiece(3, State.red);
-		gui.start();
+		gui.run();
+		assertTrue(t.isAlive());
 	}
 
 }

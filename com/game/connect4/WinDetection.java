@@ -77,7 +77,7 @@ public class WinDetection {
 	// Returns true if last move connected 4 diagonally up
 	private boolean detect4DiagonalUp(int x, int y, State state) {
 		int filledSlots = 1;
-		int dI = 1;
+		int dI = 0;
 		for (int i = x + 1; i >= 0 && i <= grid.getxWidth(); i++) {
 			if (dI >= 0 && dI <= grid.getyHeight()) {
 				break;
@@ -107,7 +107,7 @@ public class WinDetection {
 	// Returns true if last move connected 4 diagonally down
 	private boolean detect4DiagonalDown(int x, int y, State state) {
 		int filledSlots = 1;
-		int dI = 1;
+		int dI = 0;
 		for (int i = x + 1; i >= 0 && i <= grid.getxWidth(); i++) {
 			if (dI <= 0 && dI >= grid.getyHeight()) {
 				break;

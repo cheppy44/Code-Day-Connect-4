@@ -13,13 +13,13 @@ public class Connect4 {
 
 	public Connect4() {
 		gameGrid = new Grid(7, 6);
-		new Thread(gui = new GUI(gameGrid));
-		new Thread(handler = new NetworkHandler(gameGrid));
+		gui = new GUI(gameGrid);
+
+		handler = new NetworkHandler(gameGrid);
+		handler.start(gui);
 		// new Thread(visualizer = new NetworkVisualizer(network.getNodes()));
 		// //Visualization lives here when we want to enable that again
 		// visualizer.start();
-		gui.start();
-		handler.start();
 
 	}
 

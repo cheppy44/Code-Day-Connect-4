@@ -50,7 +50,7 @@ public class GameRunner {
 		network.update();
 		int placement = 0;
 		// Converts from trinary nodes to integer
-		for (int i = 0; i <= nodes.size(); i++) {
+		for (int i = 0; i < nodes.size(); i++) {
 			if (nodes.get(i).calcOutput()) {
 				if (i == 0) {
 					placement += 1;
@@ -59,7 +59,9 @@ public class GameRunner {
 				}
 			}
 		}
-		grid.dropGamePiece(placement, turn);
+		if (placement != 0) {
+			grid.dropGamePiece(placement - 1, turn);
+		}
 	}
 
 	public int getGameLength() {
