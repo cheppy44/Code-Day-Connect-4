@@ -7,16 +7,17 @@ public class Grid {
 	private int area;
 
 	private State[][] grid;
+	public WinDetection winDetector;
 
 	public Grid(int xWidth, int yHeight) {
 		this.xWidth = xWidth;
 		this.yHeight = yHeight;
 		this.area = xWidth * yHeight;
 		this.grid = new State[xWidth][yHeight];
-		WinDetection winDetector = new WinDetection(this);
+		winDetector = new WinDetection(this);
 	}
 
-	//Sets full grid to empty
+	// Sets full grid to empty
 	public void newGame() {
 		for (int x = 0; x < xWidth; x++) {
 			for (int y = 0; y < yHeight; y++) {
@@ -25,12 +26,13 @@ public class Grid {
 		}
 	}
 
-	//Returns state of slot on the coordinate grid
+	// Returns state of slot on the coordinate grid
 	public State getSlot(int x, int y) {
 		return grid[x][y];
 	}
 
-	//Decides where to place a game piece based on a slot on the X plane and returns yCoordinate
+	// Decides where to place a game piece based on a slot on the X plane and
+	// returns yCoordinate
 	public int dropGamePiece(int x, State state) {
 		boolean isEmpty = false;
 		int yCoordinate = 0;
