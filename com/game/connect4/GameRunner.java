@@ -22,9 +22,12 @@ public class GameRunner {
 
 		grid.newGame();
 
+		grid.dropGamePiece(0, State.yellow);
+		grid.dropGamePiece(0, State.red);
+		grid.dropGamePiece(0, State.red);
 		grid.dropGamePiece(0, State.red);
 		grid.dropGamePiece(0, State.yellow);
-		grid.dropGamePiece(6, State.red);
+		grid.dropGamePiece(0, State.red);
 
 		List<Node> networkANodes;
 		List<Node> networkBNodes;

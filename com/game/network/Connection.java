@@ -1,7 +1,7 @@
 package com.game.network;
 
 public class Connection {
-	private static final double USAGE_WEIGHT_OUTPUT_THRESH = 2;
+	private static final double USAGE_WEIGHT_OUTPUT_THRESH = 1;
 	private boolean state;
 	private double usageWeight;
 	private int startIndex;

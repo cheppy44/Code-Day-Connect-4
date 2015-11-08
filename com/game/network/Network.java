@@ -12,7 +12,7 @@ public class Network {
 	private static final int numLayers = 5; // TODO Play with these values in
 											// the evolution stage
 	private static final int nodesPerLayer = 5;
-	private static final int DEFAULT_USAGE_WEIGHT = 1;
+	private static final int DEFAULT_USAGE_WEIGHT = 0;
 
 	private Grid grid;
 	private int numInputs;
@@ -23,6 +23,16 @@ public class Network {
 	private List<Node> nodes;
 
 	private double fitnessLevel;
+
+	public Network(Network network) {
+		this.grid = network.grid;
+		this.numInputs = network.numInputs;
+		this.numOutputs = network.numOutputs;
+		this.layerCounts = network.layerCounts;
+		this.goodState = network.goodState;
+		this.nodes = network.nodes;
+		this.fitnessLevel = network.fitnessLevel;
+	}
 
 	public Network(Grid grid) {
 		this.grid = grid; // FIXME testing this
@@ -55,16 +65,11 @@ public class Network {
 		connectAllAdjacentNodes();
 	}
 
-	public void startTurn() {
-		update();
-	}
-
 	public void setColor(State state) {
 		goodState = state;
 	}
 
 	public void getInputFromGrid() { // FIXME REALLY TEST THIS WELL PLS
-		nodes.get(0).addInputWeight(1);
 		for (int i = 0; i < grid.getxWidth(); i++) {
 			for (int j = 0; j < grid.getyHeight(); j++) {
 				switch (grid.getState()[i][j]) {
@@ -98,10 +103,17 @@ public class Network {
 	}
 
 	public void update() {
-		getInputFromGrid();
-		for (int i = 0; i < numLayers; i++) {
-			connectionOutput();
+		getInputFromGrid(); //CODE BELOW IS FOR TESTING PURPOSES
+		//		for (Node n : nodes) {
+		//			System.out.println("Node Output " + n.getLayerNum() + " " + n.calcOutput());
+		//			for (Connection c : n.getOutputConnections()) {
+		//				System.out.println("Usageweight" + c.getUsageWeight());
+		//			}
+		//		}
+		//Test if there is input here
+		for (int i = 0; i < numLayers + 1; i++) {
 			nodeOutput();
+			connectionOutput();
 		}
 	}
 
@@ -182,12 +194,7 @@ public class Network {
 	}
 
 	public void inputFitnessLevel(double fitnessLevel) {
-		this.fitnessLevel = (this.fitnessLevel + fitnessLevel) / 2; // Averaging
-																	// the new
-																	// fitness
-																	// level
-																	// with the
-																	// old one
+		this.fitnessLevel = (this.fitnessLevel + fitnessLevel) / 2;
 	}
 
 	public List<Node> extractOutputNodes() {

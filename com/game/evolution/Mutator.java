@@ -14,8 +14,7 @@ public abstract class Mutator {
 		Random randGen = new Random();
 		for (Node n : network.getNodes()) {
 			for (Connection c : n.getOutputConnections()) {
-				if (randGen.nextInt(getActivationProbability(network)) == 0) {
-					// System.out.println("mutation");
+				if (randGen.nextInt(getActivationProbability(network)) == 1) {
 					mutateWeight(c);
 				}
 			}
@@ -31,15 +30,15 @@ public abstract class Mutator {
 	public static void mutateWeight(Connection c) {
 		Random randGen = new Random();
 		double weight = randGen.nextDouble() * 3;
-		// if (randGen.nextBoolean()) {
-		// weight = -weight;
-		// }
+		if (randGen.nextBoolean()) {
+			weight = -weight;
+		}
 		c.setUsageWeight(weight);
 
 	}
 
 	public static int getActivationProbability(Network network) {
-		int activationProbability = (int) Math.round(network.getFitnessLevel() * MUTATION_PROBABILITY_MULTIPLIER);
+		int activationProbability = Math.abs((int) Math.round(network.getFitnessLevel() * MUTATION_PROBABILITY_MULTIPLIER)) + 1;
 		return activationProbability;
 	}
 
