@@ -13,6 +13,7 @@ public class Connect4 {
 
 	public Connect4() {
 		gameGrid = new Grid(7, 6);
+
 		gui = new GUI(gameGrid);
 
 		handler = new NetworkHandler(gameGrid);

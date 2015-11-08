@@ -12,7 +12,7 @@ public class Network {
 	private static final int numLayers = 20; // TODO Play with these values in
 												// the evolution stage
 	private static final int nodesPerLayer = 20;
-	private static final int DEFAULT_USAGE_WEIGHT = 0;
+	private static final int DEFAULT_USAGE_WEIGHT = 1;
 
 	private Grid grid;
 	private int numInputs;
@@ -77,24 +77,24 @@ public class Network {
 		for (int i = 0; i < grid.getxWidth(); i++) {
 			for (int j = 0; j < grid.getyHeight(); j++) {
 				switch (grid.getState()[i][j]) {
-					case empty:
-						break;
-					case red:
-						if (goodState == State.red) {
-							nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
-						} else {
-							nodes.get(i + grid.getxWidth() * j).addInputWeight(0);
-						}
-						break;
-					case yellow:
-						if (goodState == State.yellow) {
-							nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
-						} else {
-							nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(0);
-						}
-						break;
-					default:
-						break;
+				case empty:
+					break;
+				case red:
+					if (goodState == State.red) {
+						nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
+					} else {
+						nodes.get(i + grid.getxWidth() * j).addInputWeight(0);
+					}
+					break;
+				case yellow:
+					if (goodState == State.yellow) {
+						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
+					} else {
+						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(0);
+					}
+					break;
+				default:
+					break;
 				}
 			}
 		}
@@ -124,9 +124,10 @@ public class Network {
 
 	// BEGIN UTILS FOR NETWORK SETUP HERE
 
-	public void connectNodes(int startLayerNum, int startLayerPos, int endLayerNum, int endLayerPos) throws NetworkStructureException { // connects two nodes based on
-																																		// the coordinats of the nodes
-																																		// inputted
+	public void connectNodes(int startLayerNum, int startLayerPos, int endLayerNum, int endLayerPos)
+			throws NetworkStructureException { // connects two nodes based on
+												// the coordinats of the nodes
+												// inputted
 		if (startLayerNum < 0 || startLayerNum > numLayers - 1) {
 			throw new NetworkStructureException("Invalid network structure");
 
@@ -199,7 +200,12 @@ public class Network {
 	}
 
 	public void inputFitnessLevel(double fitnessLevel) {
-		this.fitnessLevel = (this.fitnessLevel + fitnessLevel) / 2; // Averaging the new fitness level with the old one
+		this.fitnessLevel = (this.fitnessLevel + fitnessLevel) / 2; // Averaging
+																	// the new
+																	// fitness
+																	// level
+																	// with the
+																	// old one
 	}
 
 	public List<Node> extractOutputNodes() {

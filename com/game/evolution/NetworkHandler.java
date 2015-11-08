@@ -5,6 +5,7 @@ import java.util.Random;
 import com.game.connect4.GameResult;
 import com.game.connect4.GameRunner;
 import com.game.connect4.Grid;
+import com.game.graphics.GUI;
 import com.game.network.Network;
 
 public class NetworkHandler implements Runnable {
@@ -13,6 +14,7 @@ public class NetworkHandler implements Runnable {
 	private GameRunner runner;
 	private Network[] population;
 	private int generationCount;
+	private int generation = 0;
 
 	public NetworkHandler(Grid grid) {
 		this.grid = grid;
@@ -20,28 +22,35 @@ public class NetworkHandler implements Runnable {
 		population = new Network[4];
 
 		population[0] = new Network(grid); // population 0 is child A
+		System.out.println("init network 0");
 		population[1] = new Network(grid); // population 1 is child B
+		System.out.println("init network 1");
 		population[2] = new Network(grid); // population 2 is the "parent"
-											// network
+		System.out.println("init network2");
+		// network
 		population[3] = new Network(grid); // population 3 is the winner of the
-											// children
+		System.out.println("init network 3");
+		// children
 
 		// Initialize some initial mutation here
 	}
 
 	@Override
-	public void run() { //I need a loop in here
+	public void run() { // I need a loop in here
+		System.out.println("Generation " + generation);
 		testNetworks(population[0], population[1], true);
 		testNetworks(population[2], population[3], false);
 
 		population[0] = Mutator.mutate(population[2]); // Need to define mutate
 		population[1] = Mutator.mutate(population[2]);
+		generation++;
 	}
 
-	public void start() {
+	public void start(GUI gui) {
 		boolean running = true;
 		while (running) {
 			run();
+			gui.run();
 		}
 	}
 

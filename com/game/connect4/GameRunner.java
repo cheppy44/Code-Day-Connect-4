@@ -16,8 +16,11 @@ public class GameRunner {
 	}
 
 	public GameResult startGame(Network networkA, Network networkB) {
+
 		networkA.setColor(State.red);
 		networkB.setColor(State.yellow);
+
+		grid.dropGamePiece(0, State.red);
 
 		grid.newGame();
 		List<Node> networkANodes;
