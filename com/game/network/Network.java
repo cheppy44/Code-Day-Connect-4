@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.game.Logging.SpreadsheetLogger;
 import com.game.connect4.Grid;
 import com.game.connect4.State;
 import com.game.exceptions.NetworkStructureException;
@@ -104,7 +103,7 @@ public class Network {
 	}
 
 	public void update() {
-		SpreadsheetLogger.logToFile(this);
+		// SpreadsheetLogger.logToFile(this);
 		getInputFromGrid();
 		for (int i = 0; i < numLayers; i++) {
 			connectionOutput();

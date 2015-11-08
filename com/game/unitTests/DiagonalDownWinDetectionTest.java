@@ -2,7 +2,6 @@ package com.game.unitTests;
 
 import org.junit.Test;
 
-import com.game.connect4.Connect4;
 import com.game.connect4.Grid;
 import com.game.connect4.State;
 
@@ -12,8 +11,7 @@ public class DiagonalDownWinDetectionTest {
 
 	@Test
 	public void test() {
-		Connect4 game = new Connect4();
-		grid = game.gameGrid;
+		grid = new Grid(6, 7);
 		grid.newGame();
 		grid.dropGamePiece(2, State.yellow);
 		grid.dropGamePiece(2, State.yellow);

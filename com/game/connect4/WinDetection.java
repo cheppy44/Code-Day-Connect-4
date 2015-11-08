@@ -12,7 +12,8 @@ public class WinDetection {
 	// Returns true if any win condition returns true
 	public boolean detectWin(int lastMoveX, int lastMoveY, State lastPlayer) {
 
-		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer) || detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
+		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer)
+				|| detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
 				|| detect4DiagonalDown(lastMoveX, lastMoveY, lastPlayer)) {
 			return true;
 		}
@@ -22,7 +23,8 @@ public class WinDetection {
 
 	public boolean detectWin(State lastPlayer) {
 
-		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer) || detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
+		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer)
+				|| detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
 				|| detect4DiagonalDown(lastMoveX, lastMoveY, lastPlayer)) {
 			return true;
 		}
@@ -107,10 +109,7 @@ public class WinDetection {
 	private boolean detect4DiagonalDown(int x, int y, State state) {
 		int filledSlots = 1;
 		int dI = 0;
-		for (int i = x + 1; i >= 0 && i <= grid.getxWidth(); i++) {
-			if (dI <= 0 && dI >= grid.getyHeight()) {
-				break;
-			}
+		for (int i = x + 1; i >= 0 && i <= grid.getxWidth() && y - dI >= 0 && y - dI <= grid.getyHeight(); i++) {
 			if (grid.getSlot(i, y - dI) != state) {
 				break;
 			}

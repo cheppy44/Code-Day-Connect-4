@@ -29,6 +29,13 @@ public class GameRunner {
 		grid.dropGamePiece(0, State.yellow);
 		grid.dropGamePiece(0, State.red);
 
+		grid.dropGamePiece(1, State.yellow);
+		grid.dropGamePiece(1, State.red);
+		grid.dropGamePiece(1, State.red);
+		grid.dropGamePiece(1, State.red);
+		grid.dropGamePiece(1, State.yellow);
+		grid.dropGamePiece(1, State.red);
+
 		List<Node> networkANodes;
 		List<Node> networkBNodes;
 		networkANodes = networkA.extractOutputNodes();
