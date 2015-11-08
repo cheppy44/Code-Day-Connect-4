@@ -1,6 +1,7 @@
 package com.game.network;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.game.connect4.Grid;
@@ -20,7 +21,7 @@ public class Network {
 	private List<Node> nodes;
 
 	public Network(Grid grid) {
-		this.grid = grid;
+		this.grid = grid; //FIXME testing this
 		numInputs = grid.getArea() * 2;
 		numOutputs = grid.getxWidth();
 		layerCounts = new int[numLayers];
@@ -39,13 +40,12 @@ public class Network {
 			layerCounts[numLayers - 1]++;
 		}
 
-		for (int i = 0; i < numLayers; i++) { //Sets up the hidden layers
+		for (int i = 1; i < numLayers - 1; i++) { //Sets up the hidden layers
 			for (int j = 0; j < nodesPerLayer; j++) {
 				nodes.add(new Node(i, j));
 				layerCounts[i]++;
 			}
 		}
-
 		connectAllAdjacentNodes();
 	}
 
@@ -106,11 +106,12 @@ public class Network {
 		} else if (startLayerNum > endLayerNum) {
 			throw new NetworkStructureException("Invalid network structure");
 		} else {
+			LinkedList<Node> nodeLinked = new LinkedList<Node>(nodes);
 			int startPoint = 0;
 			int endPoint = 0;
 			boolean success = false, startFound = false, endFound = false;
 			int i = 0;
-			for (Node n : nodes) {
+			for (Node n : nodeLinked) {
 				if (n.getLayerNum() == startLayerNum && n.getLayerHeight() == startLayerPos) {
 					startPoint = i;
 					startFound = true;
@@ -132,17 +133,14 @@ public class Network {
 	public void connectAllAdjacentNodes() {
 		for (Node n : nodes) {
 			int nextConnectionLayer = n.getLayerNum() + 1;
-			if (nextConnectionLayer < numLayers) { //is this right or is it layercounts.length()?
-				while (layerCounts[nextConnectionLayer] == 0) {
-					nextConnectionLayer++;
-				}
-			}
+			if (nextConnectionLayer < layerCounts.length) { //is this right or is it layercounts.length()?
 
-			for (int i = 0; i < layerCounts[nextConnectionLayer]; i++) {
-				try {
-					connectNodes(n.getLayerNum(), n.getLayerHeight(), nextConnectionLayer, i);
-				} catch (NetworkStructureException e) {
-					e.printStackTrace();
+				for (int i = 0; i < layerCounts[nextConnectionLayer]; i++) {
+					try {
+						connectNodes(n.getLayerNum(), n.getLayerHeight(), nextConnectionLayer, i);
+					} catch (NetworkStructureException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

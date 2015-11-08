@@ -17,8 +17,8 @@ public class Connect4 {
 		network = new Network(gameGrid);
 		new Thread(gui = new GUI(gameGrid));
 		new Thread(visualizer = new NetworkVisualizer(network.getNodes()));
-		gui.start();
 		visualizer.start();
+		gui.start();
 
 	}
 
