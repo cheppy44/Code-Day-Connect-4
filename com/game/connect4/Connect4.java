@@ -17,15 +17,13 @@ public class Connect4 {
 		gui = new GUI(gameGrid);
 
 		handler = new NetworkHandler(gameGrid);
-		handler.start(gui);
-		// new Thread(visualizer = new NetworkVisualizer(network.getNodes()));
+		//handler.start(gui);
+		//visualizer = new NetworkVisualizer(network.getNodes()));
 		// //Visualization lives here when we want to enable that again
 		// visualizer.start();
-
 	}
 
 	public static void main(String[] args) {
 		new Connect4();
 	}
-
 }

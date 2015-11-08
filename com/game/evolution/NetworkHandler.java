@@ -54,18 +54,8 @@ public class NetworkHandler implements Runnable {
 		}
 	}
 
-	private void testNetworks(Network networkA, Network networkB, boolean sneakyBoolean) { // Sets
-																							// the
-																							// fitness
-																							// level
-																							// of
-																							// the
-																							// two
-																							// networks
-																							// according
-																							// to
-																							// the
-																							// result.
+	private void testNetworks(Network networkA, Network networkB, boolean sneakyBoolean) {
+
 		GameResult[] gameWinners = new GameResult[2];
 		int[] gameLengths = new int[2];
 
@@ -77,20 +67,20 @@ public class NetworkHandler implements Runnable {
 
 		for (int i = 0; i < 2; i++) {
 			switch (gameWinners[i]) {
-			case PlayerA:
-				networkA.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
-				networkB.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
-				break;
-			case PlayerB:
-				networkB.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
-				networkA.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
-				break;
-			case tie:
-				networkA.inputFitnessLevel(1);
-				networkB.inputFitnessLevel(1);
-				break;
-			default:
-				break;
+				case PlayerA:
+					networkA.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
+					networkB.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
+					break;
+				case PlayerB:
+					networkB.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
+					networkA.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
+					break;
+				case tie:
+					networkA.inputFitnessLevel(1);
+					networkB.inputFitnessLevel(1);
+					break;
+				default:
+					break;
 			}
 		}
 		if (networkA.getFitnessLevel() > networkB.getFitnessLevel()) {

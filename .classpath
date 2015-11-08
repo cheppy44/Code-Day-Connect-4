@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="lib" path="C:/Users/Nathan/Documents/Code-Day-Connect-4/jars/objenesis-2.2-bin/objenesis-2.2/objenesis-2.2.jar"/>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Nathan/Documents/Code-Day-Connect-4/jars/mockito-core-1.9.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
