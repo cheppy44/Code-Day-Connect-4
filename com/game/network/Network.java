@@ -8,7 +8,6 @@ import com.game.connect4.Grid;
 import com.game.exceptions.NetworkStructureException;
 
 public class Network {
-
 	private static final int numLayers = 4; // TODO Play with these values in the evolution stage
 	private static final int nodesPerLayer = 4;
 	private static final int DEFAULT_USAGE_WEIGHT = 1;
@@ -20,6 +19,8 @@ public class Network {
 
 	private List<Node> nodes;
 
+	private int fitnessLevel;
+
 	public Network(Grid grid) {
 		this.grid = grid; // FIXME testing this
 		numInputs = grid.getArea() * 2;
@@ -27,6 +28,8 @@ public class Network {
 		layerCounts = new int[numLayers];
 
 		nodes = new ArrayList<Node>();
+
+		fitnessLevel = 0;
 
 		// The first area nodes are "input nodes"
 		// The next xWidth nodes are "output nodes"
@@ -162,5 +165,21 @@ public class Network {
 	public int getnumInputs() {
 		// TODO Auto-generated method stub
 		return numInputs;
+	}
+
+	public int getFitnessLevel() {
+		return fitnessLevel;
+	}
+
+	public void setFitnessLevel(int fitnessLevel) {
+		this.fitnessLevel = fitnessLevel;
+	}
+
+	public List<Node> extractOutputNodes() {
+		List<Node> outputNodes = new ArrayList<Node>();
+		for (int i = numOutputs; i < numOutputs + numInputs; i++) {
+			outputNodes.add(nodes.get(i));
+		}
+		return outputNodes;
 	}
 }

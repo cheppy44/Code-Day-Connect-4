@@ -1,18 +1,19 @@
 package com.game.connect4;
 
+import com.game.evolution.NetworkHandler;
 import com.game.graphics.GUI;
 import com.game.network.Network;
 import com.game.network.NetworkVisualizer;
 
 public class Connect4 {
 	public Grid gameGrid;
-	public Network network;
 	private boolean running = false;
 	GUI gui;
-
+	NetworkHandler handler;
 	NetworkVisualizer visualizer;
 
 	public Connect4() {
+		handler = new NetworkHandler();
 		gameGrid = new Grid(7, 6);
 		network = new Network(gameGrid);
 		new Thread(gui = new GUI(gameGrid));
