@@ -55,6 +55,10 @@ public class Network {
 		connectAllAdjacentNodes();
 	}
 
+	//	public Network(Network network) {
+	//		this.network = network;
+	//	}
+
 	public void startTurn() {
 		update();
 	}
@@ -67,22 +71,22 @@ public class Network {
 		for (int i = 0; i < grid.getxWidth(); i++) {
 			for (int j = 0; j < grid.getyHeight(); j++) {
 				switch (grid.getState()[i][j]) {
-				case empty:
-					break;
-				case red:
-					if (goodState == State.red) {
-						nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
-					} else {
-						nodes.get(i + grid.getxWidth() * j).addInputWeight(0);
-					}
-					break;
-				case yellow:
-					if (goodState == State.yellow) {
-						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
-					} else {
-						nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(0);
-					}
-					break;
+					case empty:
+						break;
+					case red:
+						if (goodState == State.red) {
+							nodes.get(i + grid.getxWidth() * j).addInputWeight(1);
+						} else {
+							nodes.get(i + grid.getxWidth() * j).addInputWeight(0);
+						}
+						break;
+					case yellow:
+						if (goodState == State.yellow) {
+							nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(1);
+						} else {
+							nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(0);
+						}
+						break;
 				}
 			}
 		}
@@ -112,10 +116,9 @@ public class Network {
 
 	// BEGIN UTILS FOR NETWORK SETUP HERE
 
-	public void connectNodes(int startLayerNum, int startLayerPos, int endLayerNum, int endLayerPos)
-			throws NetworkStructureException { // connects two nodes based on
-												// the coordinats of the nodes
-												// inputted
+	public void connectNodes(int startLayerNum, int startLayerPos, int endLayerNum, int endLayerPos) throws NetworkStructureException { // connects two nodes based on
+																																		// the coordinats of the nodes
+																																		// inputted
 		if (startLayerNum < 0 || startLayerNum > numLayers - 1) {
 			throw new NetworkStructureException("Invalid network structure");
 

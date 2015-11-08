@@ -9,15 +9,24 @@ public class NetworkHandler implements Runnable {
 	private Grid grid;
 	private GameRunner runner;
 	private Network[] population;
+	private int generationCount;
 
 	public NetworkHandler(Grid grid) {
 		this.grid = grid;
 		runner = new GameRunner(grid);
+		population = new Network[3];
+
+		population[0] = new Network(grid);
+		population[1] = new Network(grid);
+		population[2] = new Network(grid);
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+
+	}
+
+	private void compareNetworks(Network networkA, Network networkB) {
 
 	}
 }
