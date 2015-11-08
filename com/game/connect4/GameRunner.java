@@ -20,9 +20,12 @@ public class GameRunner {
 		networkA.setColor(State.red);
 		networkB.setColor(State.yellow);
 
-		grid.dropGamePiece(0, State.red);
-
 		grid.newGame();
+
+		grid.dropGamePiece(0, State.red);
+		grid.dropGamePiece(0, State.yellow);
+		grid.dropGamePiece(6, State.red);
+
 		List<Node> networkANodes;
 		List<Node> networkBNodes;
 		networkANodes = networkA.extractOutputNodes();
@@ -51,7 +54,6 @@ public class GameRunner {
 	public void startTurn(Network network, List<Node> nodes, State turn) {
 		// TODO Auto-generated method stub
 		network.update();
-		System.out.println(network.getNodes().get(0).toString());
 		int placement = 0;
 		// Converts from trinary nodes to integer
 		for (int i = 0; i < nodes.size(); i++) {

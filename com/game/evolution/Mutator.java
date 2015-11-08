@@ -34,7 +34,6 @@ public abstract class Mutator {
 		// if (randGen.nextBoolean()) {
 		// weight = -weight;
 		// }
-		System.out.println("New weight" + weight);
 		c.setUsageWeight(weight);
 
 	}

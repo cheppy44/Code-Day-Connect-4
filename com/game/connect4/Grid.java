@@ -56,7 +56,6 @@ public class Grid {
 			yCoordinate = yHeight + 1;
 		}
 
-		System.out.println("Dropped piece at " + x + yCoordinate);
 		return yCoordinate;
 	}
 

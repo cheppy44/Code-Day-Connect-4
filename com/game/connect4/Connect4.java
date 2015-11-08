@@ -17,7 +17,7 @@ public class Connect4 {
 		gui = new GUI(gameGrid);
 
 		handler = new NetworkHandler(gameGrid);
-		//handler.start(gui);
+		handler.start(gui);
 		//visualizer = new NetworkVisualizer(network.getNodes()));
 		// //Visualization lives here when we want to enable that again
 		// visualizer.start();

@@ -12,8 +12,7 @@ public class WinDetection {
 	// Returns true if any win condition returns true
 	public boolean detectWin(int lastMoveX, int lastMoveY, State lastPlayer) {
 
-		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer)
-				|| detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
+		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer) || detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
 				|| detect4DiagonalDown(lastMoveX, lastMoveY, lastPlayer)) {
 			return true;
 		}
@@ -23,8 +22,7 @@ public class WinDetection {
 
 	public boolean detectWin(State lastPlayer) {
 
-		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer)
-				|| detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
+		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer) || detect4DiagonalUp(lastMoveX, lastMoveY, lastPlayer)
 				|| detect4DiagonalDown(lastMoveX, lastMoveY, lastPlayer)) {
 			return true;
 		}
