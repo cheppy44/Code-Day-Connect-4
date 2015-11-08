@@ -6,5 +6,6 @@ public class NetworkTest {
 
 	@Test
 	public void test() {
+
 	}
 }
