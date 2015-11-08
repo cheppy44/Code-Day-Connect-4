@@ -1,5 +1,5 @@
 package com.game.network;
 
-public enum NodeType {
+public class Connection {
 
 }
