@@ -80,5 +80,9 @@ public class Grid {
 	public int getArea() {
 		return area;
 	}
+	
+	public State[][] getGrid() {
+		return grid;
+	}
 
 }
