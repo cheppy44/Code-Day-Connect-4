@@ -129,8 +129,18 @@ public class Network {
 	public void connectAllAdjacentNodes() {
 		for (Node n : nodes) {
 			int nextConnectionLayer = n.getLayerNum() + 1;
-			if (nextConnectionLayer < numLayers) { //is this right or
+			if (nextConnectionLayer < numLayers) { //is this right or is it layercounts.length()?
+				while (layerCounts[nextConnectionLayer] == 0) {
+					nextConnectionLayer++;
+				}
+			}
 
+			for (int i = 0; i < layerCounts[nextConnectionLayer]; i++) {
+				try {
+					connectNodes(n.getLayerNum(), n.getLayerHeight(), nextConnectionLayer, i);
+				} catch (NetworkStructureException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
