@@ -12,20 +12,14 @@ public class Connect4 {
 	NetworkVisualizer visualizer;
 
 	public Connect4() {
-		handler = new NetworkHandler();
 		gameGrid = new Grid(7, 6);
+		handler = new NetworkHandler(gameGrid);
 		new Thread(gui = new GUI(gameGrid));
-		visualizer.start();
+		// new Thread(visualizer = new NetworkVisualizer(network.getNodes()));
+		// //Visualization lives here when we want to enable that again
+		// visualizer.start();
 		gui.start();
 
-	}
-
-	public synchronized void start() {
-		running = true;
-	}
-
-	public synchronized void stop() {
-		running = false;
 	}
 
 	public static void main(String[] args) {

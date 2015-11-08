@@ -12,13 +12,13 @@ public abstract class Mutator {
 		return mutated; //After mutation takes place
 	}
 
-	public void mutateThreshold(Node n) {
-		generateRandom(2);
-	}
-
-	public void mutateWeights(Connection c) {
-
-	}
+	//	public void mutateThreshold(Node n) {
+	//		generateRandom(2);
+	//	}
+	//
+	//	public void mutateWeights(Connection c) {
+	//
+	//	}
 
 	public int generateRandom(int range) {
 		Random randGen = new Random();
