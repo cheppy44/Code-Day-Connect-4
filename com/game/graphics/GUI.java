@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 import com.game.connect4.Grid;
 
-public class GUI implements Runnable{
+public class GUI implements Runnable {
 	public static final int GUI_WIDTH = 500;
 	public static final int GUI_HEIGHT = 500;
 
@@ -31,19 +31,20 @@ public class GUI implements Runnable{
 		frame.setVisible(true);
 
 	}
-	
+
+	@Override
 	public void run() {
 		screen.update();
 		frame.repaint();
 	}
-	
+
 	public synchronized void start() {
 		running = true;
 		while (running) {
 			run();
 		}
 	}
-	
+
 	public synchronized void stop() {
 		running = false;
 	}

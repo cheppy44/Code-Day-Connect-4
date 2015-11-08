@@ -45,6 +45,8 @@ public class Network {
 				layerCounts[i]++;
 			}
 		}
+
+		connectAllAdjacentNodes();
 	}
 
 	public void getInputFromGrid() { //FIXME REALLY TEST THIS WELL PLS
@@ -144,5 +146,9 @@ public class Network {
 				}
 			}
 		}
+	}
+
+	public List<Node> getNodes() {
+		return nodes;
 	}
 }
