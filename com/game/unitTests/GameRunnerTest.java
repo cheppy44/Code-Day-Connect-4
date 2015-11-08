@@ -15,11 +15,13 @@ public class GameRunnerTest extends Mockito {
 	GameRunner gameRunner;
 	Grid mockGrid = mock(Grid.class);
 	Network mockNetwork = mock(Network.class);
-	List<Node> mockedList = Mockito.mock(List.class);
+	Node mockNode = mock(Node.class);
+	List<Node> mockedList = mock(List.class);
 
 	@Test
 	public void test() {
-		when(mockedList.get(anyInt()).calcOutput()).thenReturn(true);
+		when(mockedList.get(anyInt())).thenReturn(mockNode);
+		when(mockNode.calcOutput()).thenAnswer(1);
 		when(mockedList.size()).thenReturn(3);
 		gameRunner = new GameRunner(mockGrid);
 		gameRunner.startTurn(mockNetwork, mockedList, State.red);
