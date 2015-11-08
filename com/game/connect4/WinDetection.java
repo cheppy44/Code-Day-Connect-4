@@ -7,6 +7,7 @@ public class WinDetection {
 		this.grid = grid;
 	}
 
+	// Returns true if any win condition returns true
 	public boolean detectWin(int lastMoveX, int lastMoveY, State lastPlayer) {
 
 		if (detect4Horizontal(lastMoveX, lastMoveY, lastPlayer) || detect4Vertical(lastMoveX, lastMoveY, lastPlayer)
@@ -18,6 +19,7 @@ public class WinDetection {
 		return false;
 	}
 
+	// Returns true if last move connected 4 horizontally
 	private boolean detect4Horizontal(int x, int y, State state) {
 		int filledSlots = 1;
 		for (int i = x + 1; i >= 0 && i <= grid.getxWidth(); i++) {
@@ -38,6 +40,7 @@ public class WinDetection {
 		return false;
 	}
 
+	// Returns true if last move connected 4 vertically
 	private boolean detect4Vertical(int x, int y, State state) {
 		int filledSlots = 1;
 		for (int i = y + 1; i >= 0 && i <= grid.getyHeight(); i++) {
@@ -58,6 +61,7 @@ public class WinDetection {
 		return false;
 	}
 
+	// Returns true if last move connected 4 diagonally up
 	private boolean detect4DiagonalUp(int x, int y, State state) {
 		int filledSlots = 1;
 		int dI = 1;
@@ -86,6 +90,7 @@ public class WinDetection {
 		return false;
 	}
 
+	// Returns true if last move connected 4 diagonally down
 	private boolean detect4DiagonalDown(int x, int y, State state) {
 		int filledSlots = 1;
 		int dI = 1;
