@@ -30,8 +30,7 @@ public class Screen {
 				g.drawRect(xWidth * xRect, yHeight * yRect, widthRect, heightRect);
 				g.setColor(Color.BLUE);
 				g.fillRect(xWidth * xRect, yHeight * yRect, widthRect, heightRect);
-				g.drawRoundRect(xWidth * xRect, yHeight * yRect, widthRect - CirW, heightRect - CirH, widthRect,
-						heightRect);
+				g.drawRoundRect(xWidth * xRect, yHeight * yRect, widthRect - CirW, heightRect - CirH, widthRect, heightRect);
 				g.setColor(Color.black);
 				g.fillOval(xWidth * xRect, yHeight * yRect, widthRect - CirW, heightRect - CirH);
 				xWidth++;
@@ -71,7 +70,6 @@ public class Screen {
 	}
 
 	private Object setxWidth(int i) {
-		System.out.println("hi");
 		// TODO Auto-generated method stub
 		return null;
 	}

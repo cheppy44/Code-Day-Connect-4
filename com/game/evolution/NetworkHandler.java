@@ -1,6 +1,5 @@
 package com.game.evolution;
 
-import java.util.List;
 import java.util.Random;
 
 import com.game.connect4.GameResult;
@@ -9,7 +8,6 @@ import com.game.connect4.Grid;
 import com.game.connect4.State;
 import com.game.graphics.GUI;
 import com.game.network.Network;
-import com.game.network.Node;
 
 public class NetworkHandler implements Runnable {
 
@@ -52,9 +50,11 @@ public class NetworkHandler implements Runnable {
 
 	public void start(GUI gui) {
 		boolean running = true;
+		int i = 0;
 		while (running) {
 			run();
 			gui.update();
+			i++;
 		}
 	}
 
@@ -62,16 +62,11 @@ public class NetworkHandler implements Runnable {
 		GameResult[] gameWinners = new GameResult[2];
 		int[] gameLengths = new int[2];
 
-		List<Node> nodes = population[0].getNodes();
-		System.out.println(nodes.get(0));
-
 		gameWinners[0] = runner.startGame(networkA, networkB);
 		gameLengths[0] = runner.getGameLength();
-		System.out.println(gameWinners[0]);
 
 		gameWinners[1] = runner.startGame(networkB, networkA);
 		gameLengths[1] = runner.getGameLength();
-		System.out.println(gameWinners[1]);
 
 		for (int i = 0; i < 2; i++) {
 			switch (gameWinners[i]) {
@@ -92,13 +87,11 @@ public class NetworkHandler implements Runnable {
 			}
 		}
 		if (networkA.getFitnessLevel() > networkB.getFitnessLevel()) {
-			System.out.println("Player A wins");
 			if (sneakyBoolean) {
 				population[3] = population[0];
 			} // Else do nothing, as population[2] will stay the same
 
 		} else if (networkB.getFitnessLevel() > networkB.getFitnessLevel()) {
-			System.out.println("Player B wins");
 			if (sneakyBoolean) {
 				population[3] = population[1];
 			} else {
@@ -106,7 +99,6 @@ public class NetworkHandler implements Runnable {
 			}
 
 		} else {
-			System.out.println("It's a tie");
 			Random randGen = new Random();
 			int rand = randGen.nextInt(2);
 			if (rand == 0) {
