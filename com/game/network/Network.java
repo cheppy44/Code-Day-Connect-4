@@ -18,7 +18,7 @@ public class Network {
 		}
 	}
 
-	public void updateNetworkInput() { //TODO determine if this is the best way to do this. Can it be done without the stupid nested for loop
+	public void update() { //This method will first take input from the board, then propagate the signal through the network.
 
 	}
 

@@ -15,7 +15,7 @@ public class NetworkTest {
 		Network network = new Network(grid);
 
 		for (int i = 0; i < network.getNodes().size(); i++) {
-			network.updateNetworkInput();
+			network.update();
 			assertEquals(network.getNodes().get(i).getNodeIndex(), i);
 		}
 
