@@ -23,6 +23,7 @@ public class Network {
 		this.grid = grid;
 		numInputs = grid.getArea() * 2;
 		numOutputs = grid.getxWidth();
+		layerCounts = new int[numLayers];
 
 		nodes = new ArrayList<Node>();
 
@@ -44,6 +45,8 @@ public class Network {
 				layerCounts[i]++;
 			}
 		}
+
+		connectAllAdjacentNodes();
 	}
 
 	public void getInputFromGrid() { //FIXME REALLY TEST THIS WELL PLS
@@ -143,5 +146,9 @@ public class Network {
 				}
 			}
 		}
+	}
+
+	public List<Node> getNodes() {
+		return nodes;
 	}
 }

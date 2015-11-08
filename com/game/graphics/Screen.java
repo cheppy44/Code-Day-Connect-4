@@ -17,6 +17,8 @@ public class Screen {
 	int yRect = heightRect;
 	int yHeight = 1;
 	int xWidth = 1;
+	int CirW = 5;
+	int CirH = 5;
 
 	public Screen(int width, int height, Grid grid) {
 		image = new BufferedImage(GUI.GUI_WIDTH, GUI.GUI_HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -26,8 +28,12 @@ public class Screen {
 		while (yHeight != 7) {
 			while (xWidth != 8) {
 				g.drawRect(xWidth * xRect, yHeight * yRect, widthRect, heightRect);
-				g.drawRoundRect(xWidth * xRect, yHeight * yRect, widthRect, heightRect, widthRect, heightRect);
-
+				g.setColor(Color.BLUE);
+				g.fillRect(xWidth * xRect, yHeight * yRect, widthRect, heightRect);
+				g.drawRoundRect(xWidth * xRect, yHeight * yRect, widthRect - CirW, heightRect - CirH, widthRect,
+						heightRect);
+				g.setColor(Color.black);
+				g.fillOval(xWidth * xRect, yHeight * yRect, widthRect - CirW, heightRect - CirH);
 				xWidth++;
 			}
 			xWidth = 1;
@@ -54,7 +60,7 @@ public class Screen {
 				} else {
 					g.setColor(Color.black);
 				}
-				g.fillOval(x * xRect + 50, (6 - y) * yRect, widthRect, heightRect);
+				g.fillOval(x * xRect + 50, (6 - y) * yRect, widthRect - CirW, heightRect - CirH);
 			}
 		}
 
