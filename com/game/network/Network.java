@@ -9,9 +9,9 @@ import com.game.connect4.State;
 import com.game.exceptions.NetworkStructureException;
 
 public class Network {
-	private static final int numLayers = 4; // TODO Play with these values in
-											// the evolution stage
-	private static final int nodesPerLayer = 4;
+	private static final int numLayers = 20; // TODO Play with these values in
+												// the evolution stage
+	private static final int nodesPerLayer = 20;
 	private static final int DEFAULT_USAGE_WEIGHT = 1;
 
 	private Grid grid;
@@ -22,7 +22,7 @@ public class Network {
 
 	private List<Node> nodes;
 
-	private int fitnessLevel;
+	private double fitnessLevel;
 
 	public Network(Grid grid) {
 		this.grid = grid; // FIXME testing this
@@ -63,7 +63,7 @@ public class Network {
 		update();
 	}
 
-	public void setPrevailingState(State state) {
+	public void setColor(State state) {
 		goodState = state;
 	}
 
@@ -86,6 +86,8 @@ public class Network {
 						} else {
 							nodes.get(i + grid.getxWidth() * j + grid.getArea()).addInputWeight(0);
 						}
+						break;
+					default:
 						break;
 				}
 			}
@@ -186,12 +188,12 @@ public class Network {
 		return numInputs;
 	}
 
-	public int getFitnessLevel() {
+	public double getFitnessLevel() {
 		return fitnessLevel;
 	}
 
-	public void setFitnessLevel(int fitnessLevel) {
-		this.fitnessLevel = fitnessLevel;
+	public void inputFitnessLevel(double fitnessLevel) {
+		this.fitnessLevel = (this.fitnessLevel + fitnessLevel) / 2; //Averaging the new fitness level with the old one.
 	}
 
 	public List<Node> extractOutputNodes() {
