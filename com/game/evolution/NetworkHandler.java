@@ -6,6 +6,7 @@ import java.util.Random;
 import com.game.connect4.GameResult;
 import com.game.connect4.GameRunner;
 import com.game.connect4.Grid;
+import com.game.connect4.State;
 import com.game.graphics.GUI;
 import com.game.network.Network;
 import com.game.network.Node;
@@ -53,15 +54,11 @@ public class NetworkHandler implements Runnable {
 		boolean running = true;
 		while (running) {
 			run();
-			gui.run();
+			gui.update();
 		}
 	}
 
 	private void testNetworks(Network networkA, Network networkB, boolean sneakyBoolean) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 4f33b867cca9aa7cf4ccc0c04c4f3161e3cc4474
 		GameResult[] gameWinners = new GameResult[2];
 		int[] gameLengths = new int[2];
 
@@ -78,20 +75,20 @@ public class NetworkHandler implements Runnable {
 
 		for (int i = 0; i < 2; i++) {
 			switch (gameWinners[i]) {
-				case PlayerA:
-					networkA.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
-					networkB.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
-					break;
-				case PlayerB:
-					networkB.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
-					networkA.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
-					break;
-				case tie:
-					networkA.inputFitnessLevel(1);
-					networkB.inputFitnessLevel(1);
-					break;
-				default:
-					break;
+			case PlayerA:
+				networkA.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
+				networkB.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
+				break;
+			case PlayerB:
+				networkB.inputFitnessLevel(2 - gameLengths[i] / grid.getArea());
+				networkA.inputFitnessLevel(0 + gameLengths[i] / grid.getArea());
+				break;
+			case tie:
+				networkA.inputFitnessLevel(1);
+				networkB.inputFitnessLevel(1);
+				break;
+			default:
+				break;
 			}
 		}
 		if (networkA.getFitnessLevel() > networkB.getFitnessLevel()) {
@@ -124,5 +121,12 @@ public class NetworkHandler implements Runnable {
 				}
 			}
 		}
+	}
+
+	public void guiTest(GUI gui) {
+		// TODO Auto-generated method stub
+		grid.dropGamePiece(0, State.red);
+		grid.dropGamePiece(2, State.yellow);
+		gui.update();
 	}
 }
