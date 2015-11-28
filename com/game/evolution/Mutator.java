@@ -10,11 +10,11 @@ public abstract class Mutator {
 	private static final int MUTATION_PROBABILITY_MULTIPLIER = 10;
 
 	public static Network mutate(Network network) {
-		Network mutated = network;
+		Network mutated = new Network(network);
 		Random randGen = new Random(System.currentTimeMillis());
 		for (Node n : network.getNodes()) {
 			for (Connection c : n.getOutputConnections()) {
-				if (randGen.nextInt(getActivationProbability(network)) == 1) {
+				if (randGen.nextInt(getActivationProbability(network)) == 0) {
 					mutateWeight(c);
 				}
 			}
@@ -33,18 +33,12 @@ public abstract class Mutator {
 		if (randGen.nextBoolean()) {
 			weight = -weight;
 		}
-		c.setUsageWeight(weight);
+		c.setUsageWeight(c.getUsageWeight() + weight); //Adds new usage weight to the old one
 
 	}
 
 	public static int getActivationProbability(Network network) {
 		int activationProbability = Math.abs((int) Math.round(network.getFitnessLevel() * MUTATION_PROBABILITY_MULTIPLIER)) + 1;
 		return activationProbability;
-	}
-
-	public static int generateRandom(int range) {
-		Random randGen = new Random();
-		int random = randGen.nextInt(range);
-		return random;
 	}
 }
