@@ -9,16 +9,16 @@ import com.game.connect4.State;
 
 public class Screen {
 	private BufferedImage image;
-	Grid grid;
-	Graphics g;
-	int widthRect = 50;
-	int heightRect = 50;
-	int xRect = widthRect;
-	int yRect = heightRect;
-	int yHeight = 1;
-	int xWidth = 1;
-	int CirW = 5;
-	int CirH = 5;
+	private Grid grid;
+	private Graphics g;
+	private int widthRect = 50;
+	private int heightRect = 50;
+	private int xRect = widthRect;
+	private int yRect = heightRect;
+	private int yHeight = 1;
+	private int xWidth = 1;
+	private int CirW = 5;
+	private int CirH = 5;
 
 	public Screen(int width, int height, Grid grid) {
 		image = new BufferedImage(GUI.GUI_WIDTH, GUI.GUI_HEIGHT, BufferedImage.TYPE_INT_RGB);
