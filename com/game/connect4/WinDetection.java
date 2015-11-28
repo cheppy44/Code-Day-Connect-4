@@ -96,7 +96,6 @@ public class WinDetection {
 			dI++;
 		}
 		if (filledSlots == 4) {
-			System.out.println("win condition satisfied");
 			return true;
 		}
 		return false;

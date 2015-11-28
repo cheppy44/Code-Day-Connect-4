@@ -7,7 +7,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class NetworkVisualizer implements Runnable {
+public class NetworkVisualizer {
 	public static final int GUI_WIDTH = 500;
 	public static final int GUI_HEIGHT = 500;
 
@@ -17,8 +17,9 @@ public class NetworkVisualizer implements Runnable {
 	private boolean running;
 	private List<Node> nodeData;
 
-	public NetworkVisualizer(List<Node> nodeData) {
-		this.nodeData = nodeData;
+	public NetworkVisualizer(Network networkToDisplay) {
+		nodeData = networkToDisplay.getNodes();
+		
 		screen = new NetworkScreen(GUI_WIDTH, GUI_HEIGHT);
 		frame = new JFrame("NetworkVisualizer");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +33,6 @@ public class NetworkVisualizer implements Runnable {
 		frame.setLocationByPlatform(true);
 		//frame.setFocusable(true);
 		frame.setVisible(true);
-		//renderScreen(); //Doesn't need to be called from here. Should it be?
 	}
 
 	class DrawPanel extends JPanel {
@@ -45,25 +45,8 @@ public class NetworkVisualizer implements Runnable {
 		}
 	}
 
-	public void renderScreen() {
+	public void update() {
 		screen.update(nodeData);
 		frame.repaint();
-	}
-
-	@Override
-	public void run() {
-		screen.update(nodeData);
-		frame.repaint();
-	}
-
-	public synchronized void start() {
-		running = true;
-		while (running) {
-			run();
-		}
-	}
-
-	public synchronized void stop() {
-		running = false;
 	}
 }

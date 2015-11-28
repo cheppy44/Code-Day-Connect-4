@@ -179,7 +179,6 @@ public class Network {
 	}
 
 	public int getnumInputs() {
-		// TODO Auto-generated method stub
 		return numInputs;
 	}
 
@@ -195,10 +194,6 @@ public class Network {
 		List<Node> outputNodes = new ArrayList<Node>();
 		for (int i = numInputs; i < numOutputs + numInputs; i++) {
 			outputNodes.add(nodes.get(i));
-		}
-		System.out.println(outputNodes.size());
-		for (Node n : outputNodes) {
-			System.out.println(n.calcOutput());
 		}
 		return outputNodes;
 	}
